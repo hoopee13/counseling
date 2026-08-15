@@ -22,7 +22,7 @@
      설정 방법은 README 의 &lsquo;신청 폼 백엔드 연결&rsquo; 항목을 참고하세요.
      =========================================================== */
   var FORM_CONFIG = {
-    endpoint: "https://script.google.com/macros/s/AKfycbzhYgCeN_3n-0dnTZ3_4J9x5NfNLdQSoagwCHkSyw3IUjSVIkjbls7MU3wnwzWFqTJD/exec",
+    endpoint: "https://script.google.com/macros/s/AKfycbyE1J-K2fbtI5pzVUnKKJO12eKQwl3ACCDAnHkU_C9vycab2bcLi_a8GVuxUKGvMAup/exec",
     format: "formdata",    // Apps Script 는 formdata 여야 사전 확인 요청을 피할 수 있다
     accessKey: "",         // Web3Forms 를 쓸 때만 입력
     timeout: 15000         // 응답 대기 시간(ms)
