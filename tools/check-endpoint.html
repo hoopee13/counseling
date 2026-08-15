@@ -167,7 +167,7 @@
       }
 
       /* 3단계 — 실제 신청과 같은 방식으로 보내보기 */
-      var fd = new FormData();
+      var fd = new URLSearchParams();
       fd.append("이름/닉네임", "연결테스트");
       fd.append("연락처", "test@example.com");
       fd.append("신청 시각", new Date().toLocaleString("ko-KR"));

@@ -118,7 +118,7 @@ var FORM_CONFIG = {
 
 | 방법 | 비용 | 데이터가 쌓이는 곳 | `format` |
 | --- | --- | --- | --- |
-| **Google Apps Script** | 무료 | 내 구글 시트 + 메일 알림 | `"formdata"` |
+| **Google Apps Script** | 무료 | 내 구글 시트 + 메일 알림 | `"form"` |
 | **Formspree** | 무료 50건/월 | 메일 + 대시보드 | `"json"` |
 | **Web3Forms** | 무료 250건/월 | 메일 | `"json"` |
 | **직접 만든 API** | 서버 비용 | 내 DB | `"json"` |
@@ -153,12 +153,19 @@ var FORM_CONFIG = {
 
 ```js
 endpoint: "https://script.google.com/macros/s/AKfy.../exec",
-format:   "formdata"        // Apps Script 는 반드시 formdata
+format:   "form"            // Apps Script 는 반드시 form
 ```
 
-> `format: "json"`으로 두면 브라우저가 먼저 OPTIONS 요청을 보내는데
-> Apps Script는 이를 처리하지 못해 전송이 실패합니다. 실제로 확인한 동작이니
-> 반드시 `"formdata"`를 쓰세요.
+> **Apps Script 에는 `"form"` 만 쓰세요.** 나머지 두 형식은 이렇게 실패합니다.
+>
+> - `"json"` — 브라우저가 먼저 OPTIONS 를 보내는데 Apps Script 가 처리하지 못해
+>   전송 자체가 실패합니다.
+> - `"formdata"` — 전송은 되지만 Apps Script 가 `e.parameter` 로 풀어주지 않아
+>   서버가 빈 값을 받습니다. **화면에는 접수된 것처럼 보이는데 시트에는 아무것도
+>   남지 않습니다.** 실제로 겪고 고친 문제입니다.
+>
+> `"form"`(`application/x-www-form-urlencoded`) 은 사전 확인 요청도 없고
+> `e.parameter` 로도 정상적으로 들어옵니다.
 
 코드를 수정했다면 **반드시 &lsquo;새 배포&rsquo;를 다시** 해야 반영됩니다.
 기존 배포를 수정하면 주소가 유지되고, 새로 만들면 주소가 바뀌므로
@@ -216,6 +223,10 @@ accessKey: "발급받은-키"
 - 실패하면 입력 내용을 그대로 둔 채 오류 메시지를 보여주고 버튼을 되돌립니다.
   신청자가 다시 누르거나 메일로 보낼 수 있게 안내 문구가 나옵니다.
 - 15초 안에 응답이 없으면 요청을 중단하고 같은 방식으로 안내합니다.
+- 실패 문구 아래에 원인이 함께 표시됩니다 (`원인: 서버 응답 401` 등).
+- **HTTP 200 이 와도 응답 본문을 확인합니다.** 서버가 `{"ok":false}` 를 돌려주면
+  저장되지 않은 것으로 보고 실패로 처리합니다. 저장되지 않았는데 접수 화면이
+  뜨는 일을 막기 위해서입니다.
 
 ---
 

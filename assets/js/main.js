@@ -13,17 +13,22 @@
 
      · Formspree      https://formspree.io/f/xxxxxxxx      → format: "json"
      · Web3Forms      https://api.web3forms.com/submit     → format: "json" (accessKey 필요)
-     · Google Apps Script  .../exec                        → format: "formdata"
+     · Google Apps Script  .../exec                        → format: "form"
      · 직접 만든 API  https://api.내도메인.kr/apply         → format: "json"
 
-     Apps Script 는 OPTIONS 요청을 처리하지 못하므로 반드시 "formdata" 를 쓰세요.
-     (multipart/form-data 는 사전 확인 요청 없이 바로 전송됩니다.)
+     Apps Script 에는 반드시 "form" 을 쓰세요.
+     · "json" 은 브라우저가 먼저 OPTIONS 를 보내는데 Apps Script 가 이를 처리하지 못합니다.
+     · "formdata"(multipart) 는 전송은 되지만 Apps Script 가 e.parameter 로 풀어주지
+       않아 서버가 빈 값을 받습니다. 겉으로는 접수된 것처럼 보이고 시트에는 아무것도
+       기록되지 않습니다.
+     · "form"(application/x-www-form-urlencoded) 은 사전 확인 요청도 없고
+       e.parameter 로도 정상적으로 들어옵니다.
 
      설정 방법은 README 의 &lsquo;신청 폼 백엔드 연결&rsquo; 항목을 참고하세요.
      =========================================================== */
   var FORM_CONFIG = {
     endpoint: "https://script.google.com/macros/s/AKfycbyE1J-K2fbtI5pzVUnKKJO12eKQwl3ACCDAnHkU_C9vycab2bcLi_a8GVuxUKGvMAup/exec",
-    format: "formdata",    // Apps Script 는 formdata 여야 사전 확인 요청을 피할 수 있다
+    format: "form",        // "form"(권장) | "json" | "formdata"
     accessKey: "",         // Web3Forms 를 쓸 때만 입력
     timeout: 15000         // 응답 대기 시간(ms)
   };
@@ -387,12 +392,14 @@
       el.addEventListener("change", function () { clearError(el); });
     });
 
-    function showStatus(message) {
+    function showStatus(message, detail) {
       if (!status) return;
       status.classList.add("is-visible");
       var text = $("[data-msg]", status);
       if (text) text.textContent = message;
       else status.textContent = message;
+      var det = $("[data-detail]", status);
+      if (det) det.textContent = detail || "";
     }
 
     function hideStatus() {
@@ -445,9 +452,15 @@
 
       var options = { method: "POST", signal: controller ? controller.signal : undefined };
 
-      if (FORM_CONFIG.format === "formdata") {
-        /* multipart/form-data 는 사전 확인(preflight) 요청 없이 전송된다.
-           Apps Script 처럼 OPTIONS 를 못 받는 백엔드에 필요하다. */
+      if (FORM_CONFIG.format === "form") {
+        /* application/x-www-form-urlencoded — 사전 확인 요청이 없고,
+           Apps Script 가 e.parameter 로 값을 읽을 수 있는 유일한 형식이다. */
+        var params = new URLSearchParams();
+        Object.keys(payload).forEach(function (key) { params.append(key, payload[key]); });
+        options.body = params;
+      } else if (FORM_CONFIG.format === "formdata") {
+        /* multipart/form-data — 사전 확인 요청은 없지만
+           Apps Script 는 이 형식을 e.parameter 로 풀어주지 않는다. */
         var body = new FormData();
         Object.keys(payload).forEach(function (key) { body.append(key, payload[key]); });
         options.body = body;
@@ -459,10 +472,18 @@
       return fetch(FORM_CONFIG.endpoint, options).then(function (res) {
         if (timer) window.clearTimeout(timer);
         if (!res.ok) throw new Error("서버 응답 " + res.status);
-        return res;
+        return res.text();
       }, function (err) {
         if (timer) window.clearTimeout(timer);
         throw err;
+      }).then(function (body) {
+        /* 200 이 왔다고 저장된 것은 아니다. 서버가 거절했으면 실패로 다룬다.
+           이것을 확인하지 않으면 저장되지 않았는데 접수 화면이 뜬다. */
+        if (/"(ok|success)"\s*:\s*false/.test(body)) {
+          var m = body.match(/"error"\s*:\s*"([^"]*)"/);
+          throw new Error(m ? "서버가 거절함 — " + m[1] : "서버가 저장하지 못함");
+        }
+        return body;
       });
     }
 
@@ -563,7 +584,9 @@
           showStatus(
             aborted
               ? "응답이 너무 늦어요. 잠시 후 다시 시도해 주시거나 hello@maeum-eum.kr 로 보내주세요."
-              : "전송에 실패했어요. 잠시 후 다시 눌러주시거나 hello@maeum-eum.kr 로 보내주세요."
+              : "전송에 실패했어요. 잠시 후 다시 눌러주시거나 hello@maeum-eum.kr 로 보내주세요.",
+            /* 문의가 들어왔을 때 원인을 바로 알 수 있도록 기술적 이유를 함께 남긴다 */
+            aborted ? "원인: 응답 시간 초과" : "원인: " + ((err && err.message) || "알 수 없음")
           );
           if (window.console && console.error) console.error("[신청 전송 실패]", err);
         });
