@@ -23,10 +23,20 @@
  *  · 신청서에는 개인정보가 담기므로 시트 공유 범위를 최소로 유지하세요.
  */
 
-/** 접수 알림을 받을 메일 주소 */
+/** 접수 알림을 받을 메일 주소 — 실제 담당자 주소로 바꾸세요 */
 var NOTIFY_EMAIL = 'hello@maeum-eum.kr';
 
-/** 신청 내용이 쌓일 시트 이름 (없으면 자동으로 만듭니다) */
+/**
+ * 신청 내용을 저장할 스프레드시트 ID.
+ * 시트 주소에서 /d/ 와 /edit 사이에 있는 값입니다.
+ *   https://docs.google.com/spreadsheets/d/[여기가 ID]/edit
+ *
+ * 시트 메뉴의 확장 프로그램 → Apps Script 로 만든 경우에는
+ * 빈 값('')으로 두어도 현재 시트에 자동으로 기록됩니다.
+ */
+var SPREADSHEET_ID = '1_L20HorVydpcA363ak9svaX4prHR6hblPgOSewXp0TQ';
+
+/** 신청 내용이 쌓일 탭 이름 (없으면 자동으로 만듭니다) */
 var SHEET_NAME = '상담신청';
 
 /** 시트에 기록할 항목 순서 — 웹사이트가 보내는 항목명과 같아야 합니다 */
@@ -82,7 +92,15 @@ function appendRow_(data) {
 }
 
 function getSheet_() {
-  var book = SpreadsheetApp.getActiveSpreadsheet();
+  // ID 를 지정했으면 그 시트에, 아니면 스크립트가 붙어 있는 시트에 기록한다
+  var book = SPREADSHEET_ID
+    ? SpreadsheetApp.openById(SPREADSHEET_ID)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!book) {
+    throw new Error('스프레드시트를 열 수 없습니다. SPREADSHEET_ID 를 확인하세요.');
+  }
+
   var sheet = book.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
@@ -125,4 +143,33 @@ function json(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * 배포 전 점검용.
+ * Apps Script 편집기 위쪽에서 함수 목록을 testWrite 로 고르고 실행하면
+ * 시트에 예시 한 줄이 기록되고 알림 메일이 갑니다.
+ * (처음 실행할 때 구글 권한 승인 창이 뜹니다. 승인해야 배포 후에도 동작합니다.)
+ *
+ * 확인이 끝나면 시트에서 그 줄을 지우면 됩니다.
+ */
+function testWrite() {
+  var sample = {
+    '이름/닉네임': '테스트',
+    '연락처': 'test@example.com',
+    '연령대': '만 27-30세',
+    '현재 상황': '직장인 1-3년 차',
+    '관심 주제': '번아웃 회복',
+    '상담 방식': '화상',
+    '편한 시간대': '평일 저녁',
+    '하고 싶은 이야기': '설치가 잘 되었는지 확인하는 예시 줄입니다.',
+    '청년 할인 안내': '해당 없음',
+    '개인정보 동의': '동의',
+    '신청 시각': new Date().toLocaleString('ko-KR')
+  };
+
+  appendRow_(sample);
+  notify_(sample);
+
+  Logger.log('시트 기록과 메일 발송을 마쳤습니다. 시트와 메일함을 확인하세요.');
 }

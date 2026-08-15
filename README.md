@@ -128,12 +128,20 @@ var FORM_CONFIG = {
 
 ### 1. Google Apps Script (무료, 데이터 직접 보유)
 
-`backend/google-apps-script.gs` 파일에 설치 방법이 주석으로 들어 있습니다. 요약하면,
+`backend/google-apps-script.gs` 의 `SPREADSHEET_ID` 는 이미
+운영용 시트 ID(`1_L20Hor…Xp0TQ`)로 채워져 있습니다. 다른 시트를 쓰려면
+그 시트 주소의 `/d/` 와 `/edit` 사이 값으로 바꾸세요.
 
-1. 구글 시트 생성 → 확장 프로그램 → Apps Script
-2. `backend/google-apps-script.gs` 내용을 붙여넣고 `NOTIFY_EMAIL` 수정
-3. 배포 → 새 배포 → **웹 앱**, 액세스 권한을 **모든 사용자**로
-4. 나온 `.../exec` 주소를 아래처럼 설정
+1. 해당 구글 시트 → 상단 메뉴 **확장 프로그램 → Apps Script**
+2. 기본 코드를 지우고 `backend/google-apps-script.gs` 내용을 통째로 붙여넣기
+3. `NOTIFY_EMAIL` 을 실제 담당자 메일로 수정 후 저장
+4. **배포 전 점검** — 편집기 위쪽 함수 목록에서 `testWrite` 를 골라 실행
+   - 처음 실행하면 구글 권한 승인 창이 뜹니다. 승인해야 이후에도 동작합니다.
+   - 시트에 예시 한 줄이 생기고 알림 메일이 오면 정상입니다. 확인 후 그 줄은 지우세요.
+5. **배포 → 새 배포 → 유형 `웹 앱`**
+   - 실행 계정: **나**
+   - 액세스 권한: **모든 사용자** ← 이 값이 아니면 웹사이트에서 전송이 막힙니다
+6. 나온 `.../exec` 주소를 아래처럼 설정
 
 ```js
 endpoint: "https://script.google.com/macros/s/AKfy.../exec",
@@ -143,6 +151,10 @@ format:   "formdata"        // Apps Script 는 반드시 formdata
 > `format: "json"`으로 두면 브라우저가 먼저 OPTIONS 요청을 보내는데
 > Apps Script는 이를 처리하지 못해 전송이 실패합니다. 실제로 확인한 동작이니
 > 반드시 `"formdata"`를 쓰세요.
+
+코드를 수정했다면 **반드시 &lsquo;새 배포&rsquo;를 다시** 해야 반영됩니다.
+기존 배포를 수정하면 주소가 유지되고, 새로 만들면 주소가 바뀌므로
+`FORM_CONFIG.endpoint` 도 함께 갱신해야 합니다.
 
 ### 2. Formspree
 
