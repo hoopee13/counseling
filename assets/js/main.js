@@ -22,8 +22,8 @@
      설정 방법은 README 의 &lsquo;신청 폼 백엔드 연결&rsquo; 항목을 참고하세요.
      =========================================================== */
   var FORM_CONFIG = {
-    endpoint: "",          // 예) "https://formspree.io/f/abcdwxyz"
-    format: "json",        // "json" 또는 "formdata"
+    endpoint: "https://script.google.com/macros/s/AKfycbx5_vUktOQMFihkc0pWUlSZIGsV0GnWvmacKBSNa08Pt7ykunQiHF5yt-hu7UrOHMGk/exec",
+    format: "formdata",    // Apps Script 는 formdata 여야 사전 확인 요청을 피할 수 있다
     accessKey: "",         // Web3Forms 를 쓸 때만 입력
     timeout: 15000         // 응답 대기 시간(ms)
   };
