@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>신청 폼 연결 진단 — 청년마음이음상담소</title>
+<style>
+  :root{
+    --ink:#3a3d42; --ink2:#676c74; --line:#e6e2d9; --paper:#fff;
+    --coral:#c64f3a; --ok:#477a32; --okbg:#ebf5e3; --bad:#c8452a; --badbg:#ffe6e0;
+    --warnbg:#fdf3da; --warn:#85620e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:40px 20px;background:#fdfbf7;color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+       line-height:1.7;word-break:keep-all}
+  .wrap{max-width:760px;margin:0 auto}
+  h1{font-size:1.5rem;margin:0 0 8px}
+  .sub{color:var(--ink2);font-size:.95rem;margin-bottom:28px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:16px}
+  label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px}
+  input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;
+        font-size:.85rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+  button{margin-top:14px;padding:13px 26px;border:0;border-radius:999px;background:var(--coral);
+         color:#fff;font-size:.95rem;font-weight:700;cursor:pointer}
+  button:disabled{opacity:.6;cursor:not-allowed}
+  .step{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+  .step:last-child{border-bottom:0}
+  .step b{flex:none;width:22px}
+  .verdict{margin-top:18px;padding:18px 20px;border-radius:14px;font-size:.95rem}
+  .verdict h2{font-size:1.05rem;margin:0 0 10px}
+  .ok{background:var(--okbg);color:var(--ok)}
+  .bad{background:var(--badbg);color:var(--bad)}
+  .warn{background:var(--warnbg);color:var(--warn)}
+  ol{margin:10px 0 0;padding-left:20px}
+  code{background:#f2efe9;padding:2px 6px;border-radius:5px;font-size:.85em}
+  .hint{font-size:.85rem;color:var(--ink2);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>신청 폼 연결 진단</h1>
+  <p class="sub">
+    Apps Script 웹 앱이 웹사이트의 요청을 제대로 받는지 확인합니다.
+    이 파일을 브라우저에서 열고 아래 버튼만 누르면 됩니다.
+  </p>
+
+  <div class="card">
+    <label for="url">Apps Script 웹 앱 주소 (<code>/exec</code> 로 끝나는 주소)</label>
+    <input id="url" spellcheck="false"
+           value="https://script.google.com/macros/s/AKfycbx5_vUktOQMFihkc0pWUlSZIGsV0GnWvmacKBSNa08Pt7ykunQiHF5yt-hu7UrOHMGk/exec" />
+    <button id="run" type="button">확인 시작</button>
+    <p class="hint">
+      마지막 검사에서 시트에 <b>&ldquo;연결테스트&rdquo;</b> 한 줄이 기록될 수 있습니다. 확인 후 지워주세요.
+    </p>
+  </div>
+
+  <div class="card" id="out" hidden>
+    <div id="steps"></div>
+    <div id="verdict"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var steps = $("steps"), verdict = $("verdict"), out = $("out");
+
+  function log(icon, text) {
+    var d = document.createElement("div");
+    d.className = "step";
+    d.innerHTML = "<b>" + icon + "</b><span>" + text + "</span>";
+    steps.appendChild(d);
+  }
+
+  function say(kind, title, html) {
+    verdict.className = "verdict " + kind;
+    verdict.innerHTML = "<h2>" + title + "</h2>" + html;
+  }
+
+  $("run").addEventListener("click", function () {
+    var url = $("url").value.trim();
+    var btn = this;
+    steps.innerHTML = ""; verdict.innerHTML = ""; verdict.className = "";
+    out.hidden = false;
+    btn.disabled = true; btn.textContent = "확인 중…";
+
+    run(url).catch(function (e) {
+      say("bad", "진단 중 오류", "<p>" + String(e) + "</p>");
+    }).then(function () {
+      btn.disabled = false; btn.textContent = "다시 확인";
+    });
+  });
+
+  function run(url) {
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)) {
+      say("bad", "주소 형식이 올바르지 않습니다",
+        "<p><code>https://script.google.com/macros/s/…/exec</code> 형태여야 합니다. " +
+        "<code>/dev</code> 로 끝나는 주소는 본인만 접근할 수 있어 웹사이트에서 쓸 수 없습니다.</p>");
+      return Promise.resolve();
+    }
+
+    /* 1단계 — 서버에 닿기는 하는지 (응답을 읽지 않는 방식이라 CORS 영향을 받지 않음) */
+    return fetch(url, { mode: "no-cors" }).then(function () {
+      log("①", "구글 서버에 연결됨 — 주소는 살아 있습니다.");
+      return true;
+    }, function (err) {
+      log("①", "구글 서버에 연결하지 못했습니다. (" + err.message + ")");
+      say("bad", "주소에 연결되지 않습니다", "<ol>" +
+        "<li>주소에 오타가 없는지 확인해 주세요.</li>" +
+        "<li>배포가 삭제되었을 수 있습니다. Apps Script → <b>배포 관리</b>에서 확인하세요.</li>" +
+        "<li>인터넷 연결이나 방화벽도 확인해 주세요.</li></ol>");
+      return false;
+    }).then(function (alive) {
+      if (!alive) return;
+
+      /* 2단계 — 응답을 읽을 수 있는지 (익명 접근 허용 여부가 여기서 갈림) */
+      return fetch(url, { mode: "cors" }).then(function (res) {
+        return res.text().then(function (body) {
+          if (body.indexOf('"ok":true') !== -1) {
+            log("②", "응답을 정상적으로 읽었습니다 — 익명 접근이 허용되어 있습니다.");
+            return "readable";
+          }
+          if (/<html/i.test(body)) {
+            /* 로그인 요구 화면과 스크립트 오류 화면은 둘 다 HTML 이라 내용으로 구분한다 */
+            var looksLikeLogin =
+              /로그인|사용자 인증|액세스 권한|권한이 필요|Sign in|Request access|ServiceLogin/i.test(body) ||
+              /accounts\.google\.com/.test(res.url || "");
+            if (looksLikeLogin) {
+              log("②", "구글 로그인 화면이 돌아왔습니다 — 익명 접근이 막혀 있습니다.");
+              return "blocked";
+            }
+            log("②", "응답이 왔지만 내용이 웹페이지입니다 — 스크립트가 실행되지 않았습니다.");
+            return "html";
+          }
+          log("②", "예상과 다른 응답: " + body.slice(0, 120));
+          return "odd";
+        });
+      }, function (err) {
+        log("②", "응답을 읽지 못했습니다. (" + err.message + ")");
+        return "blocked";
+      });
+    }).then(function (state) {
+      if (!state) return;
+
+      if (state === "blocked") {
+        say("bad", "익명 접근이 막혀 있습니다 &mdash; 배포 설정을 고치세요",
+          "<p>서버에는 닿지만 로그인하지 않은 방문자의 요청을 구글이 막고 있습니다. " +
+          "이게 바로 사이트에서 &lsquo;전송에 실패했어요&rsquo; 가 뜨는 이유입니다.</p>" +
+          "<ol>" +
+          "<li>Apps Script → 오른쪽 위 <b>배포 → 배포 관리</b></li>" +
+          "<li>현재 배포의 <b>연필(수정)</b> 아이콘 클릭</li>" +
+          "<li><b>액세스 권한</b>을 <b>모든 사용자</b> 로 변경 " +
+          "<span style='opacity:.8'>(&lsquo;모든 Google 계정&rsquo; 아님)</span></li>" +
+          "<li>버전을 <b>새 버전</b> 으로 선택 후 <b>배포</b></li>" +
+          "</ol><p style='margin-top:10px'>기존 배포를 <b>수정</b>하면 주소가 그대로라 사이트 코드는 손대지 않아도 됩니다.</p>");
+        return;
+      }
+
+      if (state === "html") {
+        say("warn", "배포된 코드가 최신이 아닙니다",
+          "<p>주소는 살아 있지만 <code>doGet</code> 이 없는 코드가 배포돼 있습니다.</p><ol>" +
+          "<li>Apps Script 편집기에 <code>backend/google-apps-script.gs</code> 내용이 들어가 있는지 확인하고 <b>저장</b></li>" +
+          "<li><b>배포 → 배포 관리 → 수정 → 버전: 새 버전 → 배포</b></li></ol>");
+        return;
+      }
+
+      /* 3단계 — 실제 신청과 같은 방식으로 보내보기 */
+      var fd = new FormData();
+      fd.append("이름/닉네임", "연결테스트");
+      fd.append("연락처", "test@example.com");
+      fd.append("신청 시각", new Date().toLocaleString("ko-KR"));
+      fd.append("하고 싶은 이야기", "진단 페이지에서 보낸 테스트입니다. 지우셔도 됩니다.");
+
+      return fetch(url, { method: "POST", body: fd }).then(function (res) {
+        return res.text();
+      }).then(function (body) {
+        if (body.indexOf('"ok":true') !== -1) {
+          log("③", "테스트 신청이 접수되었습니다.");
+          say("ok", "정상입니다",
+            "<p>웹사이트에서 신청하면 시트에 기록됩니다. " +
+            "시트에서 <b>&ldquo;연결테스트&rdquo;</b> 줄을 확인하고 지워주세요.</p>" +
+            "<p style='margin-top:8px'>그래도 사이트에서 실패한다면, 브라우저 캐시 때문일 수 있습니다. " +
+            "<b>Ctrl+Shift+R</b>(맥은 <b>Cmd+Shift+R</b>)로 새로고침해 보세요.</p>");
+        } else if (body.indexOf('"ok":false') !== -1) {
+          log("③", "서버가 요청을 거절했습니다: " + body.slice(0, 160));
+          say("warn", "서버에는 닿았지만 저장하지 못했습니다",
+            "<p>스크립트가 값을 제대로 읽지 못했습니다. 응답 내용을 그대로 알려주세요.</p>" +
+            "<p style='margin-top:8px'><code>" + body.slice(0, 300) + "</code></p>");
+        } else {
+          log("③", "예상과 다른 응답입니다.");
+          say("warn", "응답을 해석하지 못했습니다",
+            "<p>아래 내용을 그대로 알려주세요.</p><p style='margin-top:8px'><code>" +
+            body.slice(0, 300) + "</code></p>");
+        }
+      }, function (err) {
+        log("③", "전송에 실패했습니다. (" + err.message + ")");
+        say("bad", "읽기는 되는데 전송이 막힙니다",
+          "<p>드문 경우입니다. 배포를 <b>새 버전</b>으로 다시 올린 뒤 확인해 주세요. " +
+          "그래도 같으면 이 화면을 알려주세요.</p>");
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
