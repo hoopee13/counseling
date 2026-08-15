@@ -198,21 +198,21 @@
   var QUIZ = {
     questions: [
       {
-        q: "요즘 하루를 마칠 때, 가장 가까운 마음은 어느 쪽인가요?",
+        q: "요즘 가장 바라는 것은 무엇에 가깝나요?",
         options: [
-          { label: "완전히 방전돼서 아무것도 못 하겠어요", score: "burnout" },
-          { label: "이 길이 맞나 계속 의심이 들어요", score: "career" },
-          { label: "나를 어떻게 설명해야 할지 모르겠어요", score: "branding" },
-          { label: "이유 없이 마음이 자주 가라앉아요", score: "self" }
+          { label: "잘 쉬고 나답게 회복하는 것", score: "burnout" },
+          { label: "일과 진로의 방향을 정하는 것", score: "career" },
+          { label: "나를 잘 설명할 수 있게 되는 것", score: "branding" },
+          { label: "내 마음을 더 잘 이해하는 것", score: "self" }
         ]
       },
       {
-        q: "지금 가장 자주 떠올리는 문장은 무엇에 가깝나요?",
+        q: "요즘 자주 떠올리는 생각은 어느 쪽인가요?",
         options: [
-          { label: "“조금만 쉬고 싶다”", score: "burnout" },
-          { label: "“이직해야 할까, 버텨야 할까”", score: "career" },
-          { label: "“면접이나 소개 자리가 늘 어렵다”", score: "branding" },
-          { label: "“남들과 비교하다 하루가 간다”", score: "self" }
+          { label: "“잠깐 멈추고 숨을 고르고 싶다”", score: "burnout" },
+          { label: "“다음 단계를 제대로 준비하고 싶다”", score: "career" },
+          { label: "“내 강점을 말로 정리하고 싶다”", score: "branding" },
+          { label: "“비교 대신 내 기준을 세우고 싶다”", score: "self" }
         ]
       },
       {
@@ -227,23 +227,23 @@
     ],
     results: {
       burnout: {
-        tone: "apricot",
+        tone: "coral",
         icon: "flame",
         name: "쉼표 프로젝트",
         tagline: "번아웃 회복 · 4주 코스",
-        desc: "에너지가 어디서 새는지 먼저 찾아요. 쉬는 법부터 다시 배우고, 무너지지 않는 나만의 리듬을 세웁니다.",
+        desc: "내 에너지가 어디서 차오르는지 먼저 찾아요. 잘 쉬는 법을 익히고 오래 지속할 나만의 리듬을 세웁니다.",
         href: "programs.html#burnout"
       },
       career: {
-        tone: "sage",
+        tone: "blue",
         icon: "compass",
         name: "방향 찾기 세션",
         tagline: "취업·진로 · 5주 코스",
-        desc: "스펙을 더 쌓기 전에 기준부터 세워요. 강점과 가치를 정리해 현실적인 진로 가설과 90일 계획을 만듭니다.",
+        desc: "스펙을 더 쌓기 전에 나만의 기준부터 세워요. 강점과 가치를 정리해 현실적인 진로 가설과 90일 계획을 만듭니다.",
         href: "programs.html#career"
       },
       branding: {
-        tone: "butter",
+        tone: "sun",
         icon: "sparkle",
         name: "나다움 브랜딩 랩",
         tagline: "퍼스널 브랜딩 · 6주 소그룹",
@@ -251,11 +251,11 @@
         href: "programs.html#branding"
       },
       self: {
-        tone: "lilac",
+        tone: "green",
         icon: "leaf",
         name: "마음 이음 서클",
         tagline: "자기 이해 · 8주 그룹",
-        desc: "비슷한 고민을 가진 또래와 안전하게 나눠요. 감정과 관계 패턴을 살피며 나를 설명할 언어를 늘립니다.",
+        desc: "비슷한 고민을 가진 또래와 안전하게 나눠요. 감정과 관계의 결을 살피며 나를 설명할 언어를 늘립니다.",
         href: "programs.html#self"
       }
     }

@@ -13,7 +13,7 @@
 <meta property="og:description" content="쉼표 프로젝트, 방향 찾기 세션, 나다움 브랜딩 랩, 마음 이음 서클. 주차별 커리큘럼을 확인하세요." />
 <meta property="og:image" content="https://hoopee13.github.io/counseling/assets/img/og-image.png" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="theme-color" content="#fffbf6" />
+<meta name="theme-color" content="#fdfbf7" />
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -49,12 +49,20 @@
 <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10.5c0 6-8 11.5-8 11.5s-8-5.5-8-11.5a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10.2" r="2.8"/></symbol>
 <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16.5V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9.5"/><path d="M2.5 16.5h19l-.6 2a1.5 1.5 0 0 1-1.4 1H4.5a1.5 1.5 0 0 1-1.4-1Z"/></symbol>
 <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+<symbol id="i-logo" viewBox="0 0 100 100">
+<circle cx="23" cy="25" r="8.5" fill="#5B8FCF"/>
+<circle cx="77" cy="25" r="8.5" fill="#8CC56E"/>
+<path d="M50 52c-4-12-14-16-20-11-8 6-8 19-1 25l21 20" fill="none" stroke="#5B8FCF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 52c4-12 14-16 20-11 8 6 8 19 1 25l-21 20" fill="none" stroke="#8CC56E" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 76s-9.5-6-9.5-11.5c0-3.3 2.6-5 5.2-4 2 .8 4.3 3.2 4.3 3.2s2.3-2.4 4.3-3.2c2.6-1 5.2.7 5.2 4C59.5 70 50 76 50 76Z" fill="#F4826B"/>
+<g stroke="#F4826B" stroke-width="3.8" stroke-linecap="round"><path d="M50 36V26M43 37l-3-6M57 37l3-6"/></g>
+</symbol>
 </defs></svg>
 
 <header class="nav">
   <div class="nav__inner">
     <a class="logo" href="index.html">
-      <span class="logo__mark"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+      <span class="logo__mark"><svg class="brand-mark" aria-hidden="true"><use href="#i-logo"></use></svg></span>
       <span>청년마음이음상담소</span>
     </a>
     <button class="nav__toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu"><span></span></button>
@@ -77,7 +85,7 @@
         <a href="index.html">홈</a><span aria-hidden="true">›</span><span>프로그램</span>
       </nav>
       <h1>지금의 나에게 맞는 코스를 골라요</h1>
-      <p>모든 프로그램은 &lsquo;고치는 것&rsquo;이 아니라 &lsquo;정리하고 연습하는 것&rsquo;에서 출발합니다. 어떤 걸 골라야 할지 모르겠다면 무료 첫 상담에서 함께 정해요.</p>
+      <p>모든 프로그램은 &lsquo;발견하고 연습하는 것&rsquo;에서 출발합니다. 어떤 걸 골라야 할지 모르겠다면 무료 첫 상담에서 함께 정해요.</p>
     </div>
   </section>
 
@@ -86,13 +94,13 @@
     <div class="wrap">
       <div class="grid grid-2">
 
-        <article class="program program--apricot reveal" id="burnout">
+        <article class="program program--coral reveal" id="burnout">
           <div class="program__head">
             <span class="icon-badge" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-flame"></use></svg></span>
-            <span class="tag tag--apricot">번아웃 회복</span>
+            <span class="tag tag--coral">번아웃 회복</span>
           </div>
           <h2 class="program__title">쉼표 프로젝트</h2>
-          <p class="program__desc">의욕이 사라진 건 게을러서가 아니에요. 에너지가 어디로 새는지 찾아 무너지지 않는 나만의 리듬을 다시 세우는 4주입니다.</p>
+          <p class="program__desc">잘 쉬는 것도 연습이 필요해요. 내 에너지가 어디서 차오르는지 찾아 오래 지속할 수 있는 나만의 리듬을 세우는 4주입니다.</p>
           <ul class="checklist program__list">
             <li>1주차 — 번아웃 단계 체크, 에너지 지도 그리기</li>
             <li>2주차 — 완벽주의·과잉책임 패턴 알아차리기</li>
@@ -102,10 +110,10 @@
           <p class="program__meta"><span>1:1 · 주 1회 50분</span><strong>4주 코스</strong></p>
         </article>
 
-        <article class="program program--sage reveal" data-delay="70" id="career">
+        <article class="program program--blue reveal" data-delay="70" id="career">
           <div class="program__head">
-            <span class="icon-badge icon-badge--sage" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-compass"></use></svg></span>
-            <span class="tag tag--sage">취업·진로</span>
+            <span class="icon-badge icon-badge--blue" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-compass"></use></svg></span>
+            <span class="tag tag--blue">취업·진로</span>
           </div>
           <h2 class="program__title">방향 찾기 세션</h2>
           <p class="program__desc">스펙을 하나 더 쌓기 전에 어디로 갈지부터. 흥미·강점·가치를 정리해 현실적인 진로 가설과 다음 90일 계획을 만듭니다.</p>
@@ -119,10 +127,10 @@
           <p class="program__meta"><span>1:1 · 주 1회 50분</span><strong>5주 코스</strong></p>
         </article>
 
-        <article class="program program--butter reveal" id="branding">
+        <article class="program program--sun reveal" id="branding">
           <div class="program__head">
-            <span class="icon-badge icon-badge--butter" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
-            <span class="tag tag--butter">퍼스널 브랜딩</span>
+            <span class="icon-badge icon-badge--sun" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
+            <span class="tag tag--sun">퍼스널 브랜딩</span>
           </div>
           <h2 class="program__title">나다움 브랜딩 랩</h2>
           <p class="program__desc">잘 보이는 법이 아니라 잘 설명하는 법. 흩어진 경험을 하나의 이야기로 묶고 이력서·포트폴리오·SNS까지 연결하는 6주 소그룹 워크숍이에요.</p>
@@ -136,13 +144,13 @@
           <p class="program__meta"><span>소그룹 4-6인 · 90분</span><strong>6주 코스</strong></p>
         </article>
 
-        <article class="program program--lilac reveal" data-delay="70" id="self">
+        <article class="program program--green reveal" data-delay="70" id="self">
           <div class="program__head">
-            <span class="icon-badge icon-badge--lilac" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
-            <span class="tag tag--lilac">자기 이해</span>
+            <span class="icon-badge icon-badge--green" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+            <span class="tag tag--green">자기 이해</span>
           </div>
           <h2 class="program__title">마음 이음 서클</h2>
-          <p class="program__desc">혼자 삭이던 이야기를 비슷한 또래와 안전하게 나누는 8주. 감정과 관계 패턴을 들여다보며 나를 설명할 수 있는 언어를 늘려요.</p>
+          <p class="program__desc">비슷한 또래와 안전하게 이야기를 나누는 8주. 감정과 관계의 결을 함께 살피며 나를 설명할 수 있는 언어를 늘려요.</p>
           <ul class="checklist program__list">
             <li>1-2주차 — 감정 언어 넓히기, 자기 관찰 일지 시작</li>
             <li>3-4주차 — 나의 관계 패턴 지도 그리기</li>
@@ -172,12 +180,12 @@
           <p class="card__desc">지금 상황을 듣고 어떤 방향이 맞을지 함께 봅니다. 이후 신청 의무는 없어요.</p>
         </div>
         <div class="card reveal" data-delay="70">
-          <span class="icon-badge icon-badge--sage"><svg class="ico" aria-hidden="true"><use href="#i-message"></use></svg></span>
+          <span class="icon-badge icon-badge--green"><svg class="ico" aria-hidden="true"><use href="#i-message"></use></svg></span>
           <h3 class="card__title">단회 집중 세션</h3>
           <p class="card__desc">지금 당장 결정해야 할 일이 있을 때. 한 회차 80분 동안 하나의 주제를 끝까지 다뤄요.</p>
         </div>
         <div class="card reveal" data-delay="140">
-          <span class="icon-badge icon-badge--lilac"><svg class="ico" aria-hidden="true"><use href="#i-moon"></use></svg></span>
+          <span class="icon-badge icon-badge--blue"><svg class="ico" aria-hidden="true"><use href="#i-moon"></use></svg></span>
           <h3 class="card__title">퇴근 후·주말 시간대</h3>
           <p class="card__desc">평일 저녁 7시·8시, 토요일 오전까지. 직장인·구직자 시간에 맞춰 운영합니다.</p>
         </div>
@@ -201,17 +209,17 @@
           <p class="card__desc"><b class="card__price">무료</b>20분 · 전화 또는 화상</p>
         </div>
         <div class="card reveal" data-delay="70">
-          <span class="icon-badge icon-badge--sage"><svg class="ico" aria-hidden="true"><use href="#i-user"></use></svg></span>
+          <span class="icon-badge icon-badge--green"><svg class="ico" aria-hidden="true"><use href="#i-user"></use></svg></span>
           <h3 class="card__title">1:1 세션</h3>
           <p class="card__desc"><b class="card__price">6만 원 / 회</b>50분 · 코스 신청 시 할인</p>
         </div>
         <div class="card reveal" data-delay="140">
-          <span class="icon-badge icon-badge--butter"><svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg></span>
+          <span class="icon-badge icon-badge--sun"><svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg></span>
           <h3 class="card__title">그룹·소그룹</h3>
           <p class="card__desc"><b class="card__price">3.5만 원 / 회</b>90-100분 · 코스 단위 운영</p>
         </div>
         <div class="card reveal" data-delay="210">
-          <span class="icon-badge icon-badge--lilac"><svg class="ico" aria-hidden="true"><use href="#i-gift"></use></svg></span>
+          <span class="icon-badge icon-badge--blue"><svg class="ico" aria-hidden="true"><use href="#i-gift"></use></svg></span>
           <h3 class="card__title">청년 할인</h3>
           <p class="card__desc"><b class="card__price">최대 30%</b>구직 중·사회초년생 대상</p>
         </div>
@@ -248,12 +256,12 @@
     <div class="footer__top">
       <div>
         <div class="logo">
-          <span class="logo__mark"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+          <span class="logo__mark"><svg class="brand-mark" aria-hidden="true"><use href="#i-logo"></use></svg></span>
           <span>청년마음이음상담소</span>
         </div>
         <p class="footer__about">
-          20·30 청년의 번아웃, 진로, 자기 이해를 함께 정리하는 성장 중심 상담소입니다.
-          아프지 않아도 오셔도 괜찮아요.
+          당신의 마음을 잇고, 함께 나아갑니다.
+          20·30 청년이 나다운 답을 찾아가도록 곁에서 함께하는 성장 상담소입니다.
         </p>
         <p class="emergency">
           <svg class="ico" aria-hidden="true"><use href="#i-alert"></use></svg>
