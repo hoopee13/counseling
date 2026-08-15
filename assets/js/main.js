@@ -5,6 +5,29 @@
 (function () {
   "use strict";
 
+  /* ===========================================================
+     상담 신청 폼 전송 설정
+     -----------------------------------------------------------
+     endpoint 에 신청서를 받을 주소를 넣으면 전송이 켜집니다.
+     비워 두면 전송 없이 완료 화면만 보여주는 미리보기 모드로 동작합니다.
+
+     · Formspree      https://formspree.io/f/xxxxxxxx      → format: "json"
+     · Web3Forms      https://api.web3forms.com/submit     → format: "json" (accessKey 필요)
+     · Google Apps Script  .../exec                        → format: "formdata"
+     · 직접 만든 API  https://api.내도메인.kr/apply         → format: "json"
+
+     Apps Script 는 OPTIONS 요청을 처리하지 못하므로 반드시 "formdata" 를 쓰세요.
+     (multipart/form-data 는 사전 확인 요청 없이 바로 전송됩니다.)
+
+     설정 방법은 README 의 &lsquo;신청 폼 백엔드 연결&rsquo; 항목을 참고하세요.
+     =========================================================== */
+  var FORM_CONFIG = {
+    endpoint: "",          // 예) "https://formspree.io/f/abcdwxyz"
+    format: "json",        // "json" 또는 "formdata"
+    accessKey: "",         // Web3Forms 를 쓸 때만 입력
+    timeout: 15000         // 응답 대기 시간(ms)
+  };
+
   var $  = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) {
     return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
@@ -376,6 +399,86 @@
       if (status) status.classList.remove("is-visible");
     }
 
+    var submitBtn = $('button[type="submit"]', form);
+    var submitLabel = submitBtn ? submitBtn.innerHTML : "";
+
+    function setSending(sending) {
+      if (!submitBtn) return;
+      submitBtn.disabled = sending;
+      submitBtn.innerHTML = sending
+        ? '<span class="spinner" aria-hidden="true"></span> 보내는 중…'
+        : submitLabel;
+    }
+
+    /* 신청 내용을 사람이 읽기 쉬운 형태로 정리한다.
+       메일이나 스프레드시트에 그대로 쌓여도 알아볼 수 있도록 한글 항목명을 쓴다. */
+    function buildPayload(data) {
+      var payload = {
+        "이름/닉네임": (data.get("name") || "").toString().trim(),
+        "연락처": (data.get("contact") || "").toString().trim(),
+        "연령대": (data.get("age") || "").toString() || "-",
+        "현재 상황": (data.get("status") || "").toString() || "-",
+        "관심 주제": data.getAll("topic").join(", ") || "-",
+        "상담 방식": (data.get("method") || "").toString() || "-",
+        "편한 시간대": data.getAll("time").join(", ") || "-",
+        "하고 싶은 이야기": (data.get("message") || "").toString().trim() || "-",
+        "청년 할인 안내": data.get("youth") ? "희망" : "해당 없음",
+        "개인정보 동의": "동의",
+        "신청 시각": new Date().toLocaleString("ko-KR")
+      };
+
+      /* Formspree 등에서 메일 제목과 회신 주소로 쓰이는 값 */
+      payload._subject = "[상담 신청] " + payload["이름/닉네임"] + " 님";
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload["연락처"])) {
+        payload._replyto = payload["연락처"];
+      }
+      if (FORM_CONFIG.accessKey) payload.access_key = FORM_CONFIG.accessKey;
+
+      return payload;
+    }
+
+    function send(payload) {
+      var controller = "AbortController" in window ? new AbortController() : null;
+      var timer = controller
+        ? window.setTimeout(function () { controller.abort(); }, FORM_CONFIG.timeout)
+        : null;
+
+      var options = { method: "POST", signal: controller ? controller.signal : undefined };
+
+      if (FORM_CONFIG.format === "formdata") {
+        /* multipart/form-data 는 사전 확인(preflight) 요청 없이 전송된다.
+           Apps Script 처럼 OPTIONS 를 못 받는 백엔드에 필요하다. */
+        var body = new FormData();
+        Object.keys(payload).forEach(function (key) { body.append(key, payload[key]); });
+        options.body = body;
+      } else {
+        options.headers = { "Content-Type": "application/json", Accept: "application/json" };
+        options.body = JSON.stringify(payload);
+      }
+
+      return fetch(FORM_CONFIG.endpoint, options).then(function (res) {
+        if (timer) window.clearTimeout(timer);
+        if (!res.ok) throw new Error("서버 응답 " + res.status);
+        return res;
+      }, function (err) {
+        if (timer) window.clearTimeout(timer);
+        throw err;
+      });
+    }
+
+    function showDone(name) {
+      var card = form.closest(".form-card") || form.parentNode;
+      card.innerHTML =
+        '<div class="form-done">' +
+          '<div class="icon-badge"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></div>' +
+          "<h3>" + escapeHtml(name) + "님, 신청이 접수되었어요</h3>" +
+          "<p>영업일 기준 <b>1일 이내</b>에 남겨주신 연락처로 첫 상담 안내를 보내드릴게요.<br />" +
+          "그때까지 아무것도 준비하지 않으셔도 괜찮습니다.</p>" +
+          '<a class="btn btn--ghost" href="index.html">홈으로 돌아가기</a>' +
+        "</div>";
+      card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       hideStatus();
@@ -434,19 +537,36 @@
         return;
       }
 
-      /* --- 여기까지 통과하면 유효한 신청 ---
-         실제 서비스에서는 이 지점에서 서버나 폼 서비스로 전송하세요.
-         예) fetch("/api/apply", { method: "POST", body: data })  */
-      var card = form.closest(".form-card") || form.parentNode;
-      card.innerHTML =
-        '<div class="form-done">' +
-          '<div class="icon-badge"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></div>' +
-          "<h3>" + escapeHtml(name) + "님, 신청이 접수되었어요</h3>" +
-          "<p>영업일 기준 <b>1일 이내</b>에 남겨주신 연락처로 첫 상담 안내를 보내드릴게요.<br />" +
-          "그때까지 아무것도 준비하지 않으셔도 괜찮습니다.</p>" +
-          '<a class="btn btn--ghost" href="index.html">홈으로 돌아가기</a>' +
-        "</div>";
-      card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      /* --- 여기까지 통과하면 유효한 신청 --- */
+
+      /* 전송 주소가 없으면 미리보기 모드: 화면만 넘어가고 실제로 보내지 않는다 */
+      if (!FORM_CONFIG.endpoint) {
+        if (window.console && console.warn) {
+          console.warn(
+            "[청년마음이음상담소] 신청이 전송되지 않았습니다. " +
+            "assets/js/main.js 의 FORM_CONFIG.endpoint 를 설정하세요."
+          );
+        }
+        showDone(name);
+        return;
+      }
+
+      setSending(true);
+
+      send(buildPayload(data))
+        .then(function () {
+          showDone(name);
+        })
+        .catch(function (err) {
+          setSending(false);
+          var aborted = err && err.name === "AbortError";
+          showStatus(
+            aborted
+              ? "응답이 너무 늦어요. 잠시 후 다시 시도해 주시거나 hello@maeum-eum.kr 로 보내주세요."
+              : "전송에 실패했어요. 잠시 후 다시 눌러주시거나 hello@maeum-eum.kr 로 보내주세요."
+          );
+          if (window.console && console.error) console.error("[신청 전송 실패]", err);
+        });
     });
   }
 

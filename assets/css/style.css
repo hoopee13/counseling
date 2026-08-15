@@ -276,6 +276,25 @@ b, strong { font-weight: 700; }
 .btn--soft { --btn-bg: var(--paper); --btn-fg: var(--apricot-6); box-shadow: var(--sh-2); }
 .btn--soft:hover { box-shadow: var(--sh-3); }
 
+.btn[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 전송 중 표시 */
+.spinner {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 2px solid rgba(255, 255, 255, 0.42);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 .btn--sm { padding: 10px 20px; font-size: var(--fs-xs); }
 .btn--lg { padding: 17px 34px; font-size: var(--fs-base); }
 .btn--block { width: 100%; }

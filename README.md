@@ -97,10 +97,111 @@ assets/
 
 ---
 
+## 신청 폼 백엔드 연결
+
+정적 사이트라 서버가 없으므로, **신청서를 받아줄 주소 하나만 지정**하면 전송이 켜집니다.
+설정은 `assets/js/main.js` 맨 위 `FORM_CONFIG` 한 곳뿐입니다.
+
+```js
+var FORM_CONFIG = {
+  endpoint: "",          // 여기에 주소를 넣으면 전송이 켜집니다
+  format: "json",        // "json" 또는 "formdata"
+  accessKey: "",         // Web3Forms 를 쓸 때만
+  timeout: 15000
+};
+```
+
+`endpoint`가 비어 있으면 **미리보기 모드**입니다. 전송하지 않고 완료 화면만 보여주며,
+개발자 콘솔에 안내 경고가 찍힙니다. 그래서 지금 상태로도 사이트는 정상 동작합니다.
+
+### 선택지 비교
+
+| 방법 | 비용 | 데이터가 쌓이는 곳 | `format` |
+| --- | --- | --- | --- |
+| **Google Apps Script** | 무료 | 내 구글 시트 + 메일 알림 | `"formdata"` |
+| **Formspree** | 무료 50건/월 | 메일 + 대시보드 | `"json"` |
+| **Web3Forms** | 무료 250건/월 | 메일 | `"json"` |
+| **직접 만든 API** | 서버 비용 | 내 DB | `"json"` |
+
+개인정보가 담긴 신청서라 데이터를 직접 보유하고 싶다면 **Apps Script**를 권합니다.
+가장 빨리 붙이려면 Formspree가 편합니다.
+
+### 1. Google Apps Script (무료, 데이터 직접 보유)
+
+`backend/google-apps-script.gs` 파일에 설치 방법이 주석으로 들어 있습니다. 요약하면,
+
+1. 구글 시트 생성 → 확장 프로그램 → Apps Script
+2. `backend/google-apps-script.gs` 내용을 붙여넣고 `NOTIFY_EMAIL` 수정
+3. 배포 → 새 배포 → **웹 앱**, 액세스 권한을 **모든 사용자**로
+4. 나온 `.../exec` 주소를 아래처럼 설정
+
+```js
+endpoint: "https://script.google.com/macros/s/AKfy.../exec",
+format:   "formdata"        // Apps Script 는 반드시 formdata
+```
+
+> `format: "json"`으로 두면 브라우저가 먼저 OPTIONS 요청을 보내는데
+> Apps Script는 이를 처리하지 못해 전송이 실패합니다. 실제로 확인한 동작이니
+> 반드시 `"formdata"`를 쓰세요.
+
+### 2. Formspree
+
+[formspree.io](https://formspree.io)에서 폼을 만들면 `https://formspree.io/f/xxxxxxxx` 주소가 나옵니다.
+
+```js
+endpoint: "https://formspree.io/f/xxxxxxxx",
+format:   "json"
+```
+
+메일 제목(`_subject`)과 회신 주소(`_replyto`)를 자동으로 함께 보내므로,
+받은 메일에서 바로 답장하면 신청자에게 갑니다.
+
+### 3. Web3Forms
+
+[web3forms.com](https://web3forms.com)에서 받은 액세스 키를 넣습니다.
+
+```js
+endpoint:  "https://api.web3forms.com/submit",
+format:    "json",
+accessKey: "발급받은-키"
+```
+
+### 4. 직접 만든 API
+
+`format: "json"`으로 두고 `endpoint`만 바꾸면 됩니다.
+서버에서 **CORS 허용**(`Access-Control-Allow-Origin`)만 열어주세요.
+전송되는 본문은 아래 형태입니다.
+
+```json
+{
+  "이름/닉네임": "노을",
+  "연락처": "test@example.com",
+  "연령대": "만 27-30세",
+  "현재 상황": "직장인 1-3년 차",
+  "관심 주제": "번아웃 회복, 자기 이해",
+  "상담 방식": "화상",
+  "편한 시간대": "평일 저녁",
+  "하고 싶은 이야기": "요즘 너무 지쳐요.",
+  "청년 할인 안내": "희망",
+  "개인정보 동의": "동의",
+  "신청 시각": "2026. 8. 15. 오전 10:41:21",
+  "_subject": "[상담 신청] 노을 님",
+  "_replyto": "test@example.com"
+}
+```
+
+### 전송 중·실패 시 동작
+
+- 전송 중에는 버튼이 비활성화되고 스피너와 함께 &ldquo;보내는 중…&rdquo;으로 바뀝니다.
+- 실패하면 입력 내용을 그대로 둔 채 오류 메시지를 보여주고 버튼을 되돌립니다.
+  신청자가 다시 누르거나 메일로 보낼 수 있게 안내 문구가 나옵니다.
+- 15초 안에 응답이 없으면 요청을 중단하고 같은 방식으로 안내합니다.
+
+---
+
 ## 실서비스 전 남은 작업
 
-- [ ] **신청 폼을 백엔드에 연결** — 현재는 프론트 검증까지만 동작합니다.
-      `assets/js/main.js`의 `initForm()` 안 주석 위치에 전송 코드를 넣으세요.
+- [ ] **`FORM_CONFIG.endpoint` 설정** — 위 안내대로 주소를 넣어야 신청이 실제로 전달됩니다
 - [ ] 연락처·주소·상담사 정보를 실제 정보로 교체 (현재 `○○로 12`, `02-000-0000` 등 예시)
 - [ ] 후기를 실제 동의받은 내용으로 교체 — 지금 문구는 예시입니다
 - [ ] `privacy.html`의 개인정보처리방침을 실제 운영 기준으로 검토
