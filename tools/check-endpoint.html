@@ -74,6 +74,15 @@
     steps.appendChild(d);
   }
 
+  function pretty(body) {
+    try {
+      return JSON.stringify(JSON.parse(body), null, 2)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    } catch (e) {
+      return String(body).slice(0, 500).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    }
+  }
+
   function say(kind, title, html) {
     verdict.className = "verdict " + kind;
     verdict.innerHTML = "<h2>" + title + "</h2>" + html;
@@ -119,7 +128,9 @@
       return fetch(url, { mode: "cors" }).then(function (res) {
         return res.text().then(function (body) {
           if (body.indexOf('"ok":true') !== -1) {
-            log("②", "응답을 정상적으로 읽었습니다 — 익명 접근이 허용되어 있습니다.");
+            var v = body.match(/"version"\s*:\s*"([^"]*)"/);
+            log("②", "응답을 정상적으로 읽었습니다 — 익명 접근이 허용되어 있습니다." +
+                     (v ? " (배포된 코드 버전 " + v[1] + ")" : " (버전 표시 없음 — 옛 코드가 배포돼 있습니다)"));
             return "readable";
           }
           if (/<html/i.test(body)) {
@@ -179,15 +190,17 @@
         if (body.indexOf('"ok":true') !== -1) {
           log("③", "테스트 신청이 접수되었습니다.");
           say("ok", "정상입니다",
-            "<p>웹사이트에서 신청하면 시트에 기록됩니다. " +
-            "시트에서 <b>&ldquo;연결테스트&rdquo;</b> 줄을 확인하고 지워주세요.</p>" +
-            "<p style='margin-top:8px'>그래도 사이트에서 실패한다면, 브라우저 캐시 때문일 수 있습니다. " +
-            "<b>Ctrl+Shift+R</b>(맥은 <b>Cmd+Shift+R</b>)로 새로고침해 보세요.</p>");
+            "<p>서버가 알려준 저장 위치입니다. <b>이 탭</b>을 열어보세요 " +
+            "&mdash; 첫 번째 탭이 아니라 새로 생긴 탭일 수 있습니다.</p>" +
+            "<pre style='margin-top:10px;padding:12px;background:#fff;border-radius:8px;" +
+            "overflow:auto;font-size:.8rem;white-space:pre-wrap'>" + pretty(body) + "</pre>" +
+            "<p style='margin-top:10px'>시트에서 <b>&ldquo;연결테스트&rdquo;</b> 줄을 확인하고 지워주세요.</p>");
         } else if (body.indexOf('"ok":false') !== -1) {
-          log("③", "서버가 요청을 거절했습니다: " + body.slice(0, 160));
+          log("③", "서버가 요청을 거절했습니다.");
           say("warn", "서버에는 닿았지만 저장하지 못했습니다",
-            "<p>스크립트가 값을 제대로 읽지 못했습니다. 응답 내용을 그대로 알려주세요.</p>" +
-            "<p style='margin-top:8px'><code>" + body.slice(0, 300) + "</code></p>");
+            "<p>서버가 돌려준 내용입니다. 그대로 알려주시면 원인을 짚어드릴 수 있습니다.</p>" +
+            "<pre style='margin-top:10px;padding:12px;background:#fff;border-radius:8px;" +
+            "overflow:auto;font-size:.8rem;white-space:pre-wrap'>" + pretty(body) + "</pre>");
         } else {
           log("③", "예상과 다른 응답입니다.");
           say("warn", "응답을 해석하지 못했습니다",

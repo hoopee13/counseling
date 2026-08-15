@@ -28,12 +28,15 @@
  *  7. assets/js/main.js 의 FORM_CONFIG 를 아래처럼 채웁니다.
  *
  *       endpoint: "복사한 웹 앱 URL",
- *       format:   "formdata"      ← Apps Script 는 반드시 formdata
+ *       format:   "form"          ← Apps Script 는 반드시 form
  *
  * [주의]
  *  · 코드를 수정하면 반드시 "새 배포"를 다시 해야 반영됩니다.
  *  · 신청서에는 개인정보가 담기므로 시트 공유 범위를 최소로 유지하세요.
  */
+
+/** 이 코드의 버전. 배포된 사본이 최신인지 확인하는 용도입니다. */
+var VERSION = '2026-08-15';
 
 /** 접수 알림을 받을 메일 주소 — 실제 담당자 주소로 바꾸세요 */
 var NOTIFY_EMAIL = 'hoopee1113@gmail.com';
@@ -70,25 +73,52 @@ function doPost(e) {
   try {
     var data = (e && e.parameter) ? e.parameter : {};
 
+    var keys = Object.keys(data);
+
     // 이름과 연락처가 없으면 정상적인 신청으로 보지 않는다
     if (!data['이름/닉네임'] || !data['연락처']) {
-      return json({ ok: false, error: '필수 항목이 비어 있습니다.' });
+      return json({
+        ok: false,
+        version: VERSION,
+        error: '필수 항목이 비어 있습니다.',
+        받은항목수: keys.length,
+        받은항목: keys.join(', ')          // 무엇이 왔는지 알아야 원인을 찾을 수 있다
+      });
     }
 
-    appendRow_(data);
+    var sheet = appendRow_(data);
     notify_(data);
 
-    return json({ ok: true });
+    return json({
+      ok: true,
+      version: VERSION,
+      스프레드시트: sheet.getParent().getName(),
+      탭: sheet.getName(),
+      기록된줄: sheet.getLastRow()
+    });
   } catch (err) {
-    // 실패해도 신청 내용이 사라지지 않도록 로그를 남긴다
+    // 실패해도 원인을 알 수 있도록 그대로 돌려준다
     console.error(err);
-    return json({ ok: false, error: String(err) });
+    return json({ ok: false, version: VERSION, error: String(err) });
   }
 }
 
-/** 배포가 살아 있는지 브라우저에서 확인할 때 사용합니다 */
+/** 배포가 살아 있는지, 어디에 기록하는지 브라우저에서 확인할 때 사용합니다 */
 function doGet() {
-  return json({ ok: true, message: '청년마음이음상담소 신청 접수 서버가 동작 중입니다.' });
+  try {
+    var sheet = getSheet_();
+    return json({
+      ok: true,
+      version: VERSION,
+      message: '청년마음이음상담소 신청 접수 서버가 동작 중입니다.',
+      스프레드시트: sheet.getParent().getName(),
+      탭: sheet.getName(),
+      현재줄수: sheet.getLastRow(),
+      알림메일: NOTIFY_EMAIL
+    });
+  } catch (err) {
+    return json({ ok: false, version: VERSION, error: String(err) });
+  }
 }
 
 function appendRow_(data) {
@@ -101,6 +131,7 @@ function appendRow_(data) {
     return data[name] || '';
   });
   sheet.appendRow(row);
+  return sheet;
 }
 
 function getSheet_() {
