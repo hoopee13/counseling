@@ -24,7 +24,7 @@
  */
 
 /** 접수 알림을 받을 메일 주소 — 실제 담당자 주소로 바꾸세요 */
-var NOTIFY_EMAIL = 'hello@maeum-eum.kr';
+var NOTIFY_EMAIL = 'hoopee1113@gmail.com';
 
 /**
  * 신청 내용을 저장할 스프레드시트 ID.
