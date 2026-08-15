@@ -3,376 +3,472 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>청년마음이음상담소 — 번아웃부터 진로까지, 20·30 마음 성장 상담소</title>
-<meta name="description" content="청년마음이음상담소는 20-30대 청년을 위한 성장 중심 상담소입니다. 번아웃 회복, 취업·진로, 퍼스널 브랜딩, 자기 이해 프로그램을 함께합니다." />
-<meta property="og:title" content="청년마음이음상담소" />
-<meta property="og:description" content="아프지 않아도 괜찮아요. 20·30 청년의 번아웃, 진로, 자기 이해를 함께 정리하는 성장 상담소." />
+<title>청년마음이음상담소 — 20·30 청년을 위한 성장 상담소</title>
+<meta name="description" content="아프지 않아도 괜찮아요. 번아웃 회복, 취업·진로, 퍼스널 브랜딩, 자기 이해까지. 20-30대 청년을 위한 성장 중심 상담소입니다. 무료 첫 상담 20분." />
+<link rel="canonical" href="https://hoopee13.github.io/asdf/" />
+
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="청년마음이음상담소" />
+<meta property="og:title" content="청년마음이음상담소 — 20·30 청년을 위한 성장 상담소" />
+<meta property="og:description" content="아프지 않아도 괜찮아요. 잘 살고 싶어서 오는 곳이니까요. 번아웃·진로·자기 이해를 함께 정리합니다." />
+<meta property="og:image" content="https://hoopee13.github.io/asdf/assets/img/og-image.png" />
 <meta property="og:locale" content="ko_KR" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ff8a5b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#fffbf6" />
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/img/favicon.svg" />
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "청년마음이음상담소",
+  "description": "20-30대 청년을 위한 성장 중심 상담소. 번아웃 회복, 취업·진로, 퍼스널 브랜딩, 자기 이해 프로그램을 제공합니다.",
+  "url": "https://hoopee13.github.io/asdf/",
+  "telephone": "+82-2-000-0000",
+  "email": "hello@maeum-eum.kr",
+  "priceRange": "무료 첫 상담 · 1:1 세션 60,000원",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "KR",
+    "addressRegion": "서울특별시",
+    "addressLocality": "마포구",
+    "streetAddress": "○○로 12, 3층"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "21:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "17:00" }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">본문 바로가기</a>
+<!-- 아이콘 스프라이트 — 문서 내에서 <use href="#i-이름"> 으로 참조 -->
+<svg class="sr-only" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m16.2 7.8-2.1 6.4-6.3 2.1 2.1-6.4Z"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.6 13.8 8a2 2 0 0 0 1.3 1.3l5.4 1.8-5.4 1.8A2 2 0 0 0 13.8 14l-1.8 5.4-1.8-5.4a2 2 0 0 0-1.3-1.3L3.5 11l5.4-1.8A2 2 0 0 0 10.2 8Z"/><path d="M18.5 3v3M20 4.5h-3M5.5 17v2.5M6.8 18.2H4.3"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="5.5" y="2.5" width="13" height="19" rx="2.5"/><path d="M12 18.2h.01"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M19.5 21v-1.8a4.7 4.7 0 0 0-4.7-4.7H9.2a4.7 4.7 0 0 0-4.7 4.7V21"/><circle cx="12" cy="7.5" r="4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 15a4.5 4.5 0 0 0-.9-8.9 6 6 0 0 0-11.4 2A3.9 3.9 0 0 0 6 15Z"/><path d="M8 19v1.5M12 18.5V21M16 19v1.5"/></symbol>
+<symbol id="i-coffee" viewBox="0 0 24 24"><path d="M17 8h1.5a3 3 0 0 1 0 6H17"/><path d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z"/><path d="M7 2.5V5M11 2.5V5M15 2.5V5"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 5.5 12 8c0-2.5 2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 12.5c0 5-3.5 7.6-7.7 9a1 1 0 0 1-.7 0C7.5 20.1 4 17.5 4 12.5V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.3-2.7a1.1 1.1 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9.5 12 1.8 1.8 3.4-3.5"/></symbol>
+<symbol id="i-quote" viewBox="0 0 24 24"><path d="M9.5 5.5c-3 0-5.5 2.5-5.5 5.5 0 2.5 1.8 4.5 4 4.5 1.7 0 3-1.2 3-2.8 0-1.5-1.1-2.7-2.6-2.7-.3 0-.6 0-.9.1.4-1.4 1.6-2.4 3.1-2.6ZM20 5.5c-3 0-5.5 2.5-5.5 5.5 0 2.5 1.8 4.5 4 4.5 1.7 0 3-1.2 3-2.8 0-1.5-1.1-2.7-2.6-2.7-.3 0-.6 0-.9.1.4-1.4 1.6-2.4 3.1-2.6Z"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M21.5 11.1V12a9.5 9.5 0 1 1-5.6-8.7"/><path d="m8.5 11.5 3 3 10-10"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v5M12 16.2h.01"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8 5.3a2 2 0 0 0 2 0L21 7"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M8.5 3h-3A2.5 2.5 0 0 0 3 5.6C3 14.6 9.4 21 18.4 21a2.5 2.5 0 0 0 2.6-2.5v-3a1.5 1.5 0 0 0-1.2-1.5l-3-.6a1.5 1.5 0 0 0-1.5.7l-.8 1.3a12 12 0 0 1-5-5l1.3-.8a1.5 1.5 0 0 0 .7-1.5l-.6-3A1.5 1.5 0 0 0 8.5 3Z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10.5c0 6-8 11.5-8 11.5s-8-5.5-8-11.5a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10.2" r="2.8"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16.5V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9.5"/><path d="M2.5 16.5h19l-.6 2a1.5 1.5 0 0 1-1.4 1H4.5a1.5 1.5 0 0 1-1.4-1Z"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+</defs></svg>
 
-<!-- ================= 헤더 ================= -->
-<header class="nav" id="nav">
+<header class="nav">
   <div class="nav__inner">
     <a class="logo" href="index.html">
-      <span class="logo__mark" aria-hidden="true">🌱</span>
+      <span class="logo__mark"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
       <span>청년마음이음상담소</span>
     </a>
-    <button class="nav__toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
-      <span></span>
-    </button>
+    <button class="nav__toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu"><span></span></button>
     <nav class="nav__menu" id="nav-menu" aria-label="주요 메뉴">
-      <a class="nav__link is-active" href="index.html">홈</a>
+      <a class="nav__link" href="index.html" aria-current="page">홈</a>
       <a class="nav__link" href="programs.html">프로그램</a>
       <a class="nav__link" href="about.html">소개</a>
-      <a class="nav__link" href="index.html#faq">자주 묻는 질문</a>
+      <a class="nav__link" href="#faq">자주 묻는 질문</a>
       <a class="btn btn--primary btn--sm nav__cta" href="apply.html">상담 신청하기</a>
     </nav>
   </div>
 </header>
+<div class="nav__scrim"></div>
 
 <main id="main">
 
-  <!-- ================= 히어로 ================= -->
+  <!-- ========== 히어로 ========== -->
   <section class="hero">
     <div class="wrap hero__inner">
-      <div class="hero__text">
-        <span class="hero__badge">☀️ <b>20·30</b> 청년을 위한 성장 상담소</span>
-        <h1 class="hero__title">
-          아프지 않아도 괜찮아요.<br />
-          <em>잘 살고 싶어서</em> 오는 곳이니까요.
-        </h1>
+      <div>
+        <p class="hero__badge"><span class="pill">20·30</span> 청년을 위한 성장 상담소</p>
+        <h1 class="hero__title">아프지 않아도 괜찮아요.<br /><em>잘 살고 싶어서</em> 오는 곳이니까요.</h1>
         <p class="hero__desc">
           번아웃, 진로 고민, 남과의 비교, 흐릿해진 나. 병이 아니라 삶의 질문이에요.
           청년마음이음상담소는 치료 대신 <b>정리·발견·연습</b>으로 다음 걸음을 함께 찾습니다.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="apply.html">무료 첫 상담 신청 →</a>
-          <a class="btn btn--ghost" href="programs.html">프로그램 둘러보기</a>
+          <a class="btn btn--primary btn--lg" href="apply.html">
+            무료 첫 상담 신청 <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#quiz-section">나에게 맞는 프로그램 찾기</a>
         </div>
-        <div class="hero__stats">
+        <dl class="hero__stats">
           <div class="hero__stat">
-            <strong data-count="1280" data-suffix="+">0</strong>
-            <span>함께한 청년</span>
+            <dt class="sr-only">함께한 청년</dt>
+            <dd style="margin:0"><strong data-count="1280" data-suffix="+">0</strong><span>함께한 청년</span></dd>
           </div>
           <div class="hero__stat">
-            <strong data-count="94" data-suffix="%">0</strong>
-            <span>재참여 의향</span>
+            <dt class="sr-only">재참여 의향</dt>
+            <dd style="margin:0"><strong data-count="94" data-suffix="%">0</strong><span>재참여 의향</span></dd>
           </div>
           <div class="hero__stat">
-            <strong>4가지</strong>
-            <span>맞춤 프로그램</span>
+            <dt class="sr-only">맞춤 프로그램</dt>
+            <dd style="margin:0"><strong>4가지</strong><span>맞춤 프로그램</span></dd>
           </div>
-        </div>
+        </dl>
       </div>
 
-      <div class="hero__visual" aria-hidden="true">
-        <div class="blob"></div>
-        <div class="hero__quote">
-          <div>
-            <p>“열심히 살았는데<br />왜 다 텅 빈 것 같지?”</p>
-            <small>— 그 질문에서 시작합니다</small>
-          </div>
-        </div>
-        <div class="float-card float-card--1"><i>🔥</i> 번아웃 회복</div>
-        <div class="float-card float-card--2"><i>🧭</i> 진로 방향 찾기</div>
-        <div class="float-card float-card--3"><i>✨</i> 나다움 브랜딩</div>
+      <div class="hero__art">
+        <svg viewBox="0 0 400 400" role="img" aria-labelledby="heroArtTitle">
+          <title id="heroArtTitle">따뜻한 햇빛 아래에서 자라나는 새싹 일러스트</title>
+          <defs>
+            <linearGradient id="gBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFE7DA" />
+              <stop offset=".52" stop-color="#FFF2D8" />
+              <stop offset="1" stop-color="#E2F0E9" />
+            </linearGradient>
+            <linearGradient id="gSun" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFC24D" />
+              <stop offset="1" stop-color="#FF9A6C" />
+            </linearGradient>
+            <linearGradient id="gPot" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FF8A5B" />
+              <stop offset="1" stop-color="#EA5C28" />
+            </linearGradient>
+            <linearGradient id="gLeafA" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#4E8C70" />
+              <stop offset="1" stop-color="#79B294" />
+            </linearGradient>
+            <linearGradient id="gLeafB" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#6FA98B" />
+              <stop offset="1" stop-color="#9BCBB2" />
+            </linearGradient>
+          </defs>
+
+          <circle cx="200" cy="200" r="172" fill="url(#gBg)" />
+          <circle cx="200" cy="200" r="172" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5" />
+          <circle cx="200" cy="200" r="140" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="3 9" />
+
+          <!-- 햇빛 -->
+          <circle cx="296" cy="112" r="33" fill="url(#gSun)" opacity=".92" />
+          <g stroke="#FFB24D" stroke-width="3" stroke-linecap="round" opacity=".65">
+            <path d="M296 58v-14M348 112h14M334 74l10-10M334 150l10 10" />
+          </g>
+
+          <!-- 지면 -->
+          <path d="M52 322a148 148 0 0 0 296 0Z" fill="#fff" opacity=".6" />
+
+          <!-- 줄기와 잎 -->
+          <!-- 줄기는 수직선이라 바운딩 박스 폭이 0 → 그라디언트가 렌더링되지 않으므로 단색으로 칠한다 -->
+          <path d="M200 318V196" stroke="#4E8C70" stroke-width="9" stroke-linecap="round" fill="none" />
+          <path d="M200 262c-32-4-54-30-52-62 32 2 52 26 52 62Z" fill="url(#gLeafA)" />
+          <path d="M200 232c30-4 50-28 48-58-30 2-48 26-48 58Z" fill="url(#gLeafB)" />
+
+          <!-- 화분 -->
+          <path d="M156 318h88l-11 56a12 12 0 0 1-12 10h-42a12 12 0 0 1-12-10Z" fill="url(#gPot)" />
+          <rect x="146" y="302" width="108" height="24" rx="12" fill="#FF7A45" />
+
+          <!-- 반짝임 -->
+          <g fill="#fff" opacity=".85">
+            <circle cx="112" cy="146" r="5" />
+            <circle cx="286" cy="256" r="4" />
+            <circle cx="132" cy="252" r="3" />
+          </g>
+          <g stroke="#FFB24D" stroke-width="2.5" stroke-linecap="round" opacity=".7">
+            <path d="M96 210h12M102 204v12M292 172h10M297 167v10" />
+          </g>
+        </svg>
+
+        <span class="hero__chip hero__chip--1"><svg class="ico" aria-hidden="true"><use href="#i-flame"></use></svg> 번아웃 회복</span>
+        <span class="hero__chip hero__chip--2"><svg class="ico" aria-hidden="true"><use href="#i-compass"></use></svg> 진로 방향 찾기</span>
+        <span class="hero__chip hero__chip--3"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"></use></svg> 나다움 브랜딩</span>
       </div>
     </div>
   </section>
 
-  <!-- ================= 고민 체크 ================= -->
-  <section class="section section--cream">
+  <!-- ========== 고민 체크 ========== -->
+  <section class="section section--cream" id="worries">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <span class="eyebrow">이런 마음이라면</span>
+        <p class="eyebrow">이런 마음이라면</p>
         <h2 class="section-title">하나라도 끄덕였다면, 여기가 맞아요</h2>
-        <p class="section-desc">
-          상담은 특별한 사람이 받는 게 아니에요. 오늘을 조금 더 잘 살고 싶은 사람이면 충분합니다.
-        </p>
+        <p class="section-desc">상담은 특별한 사람이 받는 게 아니에요. 오늘을 조금 더 잘 살고 싶은 사람이면 충분합니다.</p>
       </div>
 
-      <div class="grid grid-3">
-        <div class="worry-card reveal"><i>😮‍💨</i><span>퇴근하면 아무것도 하기 싫고, 주말에도 회복이 안 돼요.</span></div>
-        <div class="worry-card reveal" data-delay="80"><i>🧩</i><span>이 일을 계속해도 될까? 진로를 바꿔야 하나 매일 흔들려요.</span></div>
-        <div class="worry-card reveal" data-delay="160"><i>📱</i><span>SNS를 보면 나만 제자리인 것 같아 조급해져요.</span></div>
-        <div class="worry-card reveal"><i>🫥</i><span>남들이 원하는 모습으로 살다 보니 내가 뭘 좋아하는지 모르겠어요.</span></div>
-        <div class="worry-card reveal" data-delay="80"><i>💬</i><span>거절을 못 해서 늘 나중에 후회하고 혼자 삭여요.</span></div>
-        <div class="worry-card reveal" data-delay="160"><i>🌙</i><span>큰 문제는 없는데, 이유 없이 마음이 자주 가라앉아요.</span></div>
+      <ul class="grid grid-3">
+        <li class="worry reveal"><svg class="ico" aria-hidden="true"><use href="#i-moon"></use></svg><span>퇴근하면 아무것도 하기 싫고, 주말에도 회복이 안 돼요.</span></li>
+        <li class="worry reveal" data-delay="70"><svg class="ico" aria-hidden="true"><use href="#i-compass"></use></svg><span>이 일을 계속해도 될까? 진로를 바꿔야 하나 매일 흔들려요.</span></li>
+        <li class="worry reveal" data-delay="140"><svg class="ico" aria-hidden="true"><use href="#i-smartphone"></use></svg><span>SNS를 보면 나만 제자리인 것 같아 조급해져요.</span></li>
+        <li class="worry reveal"><svg class="ico" aria-hidden="true"><use href="#i-user"></use></svg><span>남들이 원하는 모습으로 살다 보니 내가 뭘 좋아하는지 모르겠어요.</span></li>
+        <li class="worry reveal" data-delay="70"><svg class="ico" aria-hidden="true"><use href="#i-message"></use></svg><span>거절을 못 해서 늘 나중에 후회하고 혼자 삭여요.</span></li>
+        <li class="worry reveal" data-delay="140"><svg class="ico" aria-hidden="true"><use href="#i-cloud"></use></svg><span>큰 문제는 없는데, 이유 없이 마음이 자주 가라앉아요.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== 프로그램 추천 진단 ========== -->
+  <section class="section section--glow" id="quiz-section">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--lilac">30초 진단</p>
+        <h2 class="section-title">나에게 맞는 프로그램 찾기</h2>
+        <p class="section-desc">세 가지 질문에 답하면 지금 상황에 가장 가까운 코스를 알려드려요. 정답은 없습니다.</p>
+      </div>
+
+      <div class="quiz reveal" id="quiz" aria-live="polite">
+        <!-- 스크립트가 질문을 채웁니다. 자바스크립트가 꺼져 있으면 아래 안내가 보입니다. -->
+        <p class="center section-desc">
+          진단을 사용하려면 자바스크립트가 필요해요.
+          <a href="programs.html" style="color:var(--apricot-6); text-decoration:underline">프로그램 목록에서 직접 골라보세요.</a>
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ================= 프로그램 ================= -->
-  <section class="section" id="programs">
+  <!-- ========== 프로그램 ========== -->
+  <section class="section section--cream" id="programs">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <span class="eyebrow">프로그램</span>
+        <p class="eyebrow">프로그램</p>
         <h2 class="section-title">지금 필요한 것부터 시작해요</h2>
-        <p class="section-desc">
-          진단명이 아니라 상황에서 출발합니다. 첫 상담에서 나에게 맞는 코스를 함께 골라요.
-        </p>
+        <p class="section-desc">진단명이 아니라 상황에서 출발합니다. 첫 상담에서 나에게 맞는 코스를 함께 골라요.</p>
       </div>
 
       <div class="grid grid-2">
-        <article class="program reveal">
-          <span class="program__tag program__tag--apricot">번아웃 회복</span>
+        <article class="program program--apricot reveal">
+          <div class="program__head">
+            <span class="icon-badge" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-flame"></use></svg></span>
+            <span class="tag tag--apricot">번아웃 회복</span>
+          </div>
           <h3 class="program__title">쉼표 프로젝트</h3>
-          <p class="program__desc">
-            달리다 멈춘 게 아니라, 너무 오래 달렸을 뿐이에요. 에너지가 어디서 새는지 찾고
-            지속 가능한 나만의 리듬을 다시 세웁니다.
-          </p>
-          <ul class="program__list">
+          <p class="program__desc">달리다 멈춘 게 아니라, 너무 오래 달렸을 뿐이에요. 에너지가 어디서 새는지 찾고 지속 가능한 나만의 리듬을 다시 세웁니다.</p>
+          <ul class="checklist program__list">
             <li>번아웃 단계 체크 &amp; 에너지 지도 그리기</li>
             <li>완벽주의·과잉책임 패턴 다루기</li>
             <li>회복 루틴과 경계 세우기 연습</li>
           </ul>
-          <div class="program__meta"><span>1:1 · 주 1회</span><strong>4주 코스</strong></div>
+          <p class="program__meta"><span>1:1 · 주 1회 50분</span><strong>4주 코스</strong></p>
         </article>
 
-        <article class="program reveal" data-delay="80">
-          <span class="program__tag program__tag--sage">취업·진로</span>
+        <article class="program program--sage reveal" data-delay="70">
+          <div class="program__head">
+            <span class="icon-badge icon-badge--sage" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-compass"></use></svg></span>
+            <span class="tag tag--sage">취업·진로</span>
+          </div>
           <h3 class="program__title">방향 찾기 세션</h3>
-          <p class="program__desc">
-            스펙을 더 쌓기 전에, 어디로 갈지부터 정해요. 흥미·강점·가치를 정리해
-            현실적인 진로 가설과 실행 계획을 만듭니다.
-          </p>
-          <ul class="program__list">
+          <p class="program__desc">스펙을 더 쌓기 전에, 어디로 갈지부터 정해요. 흥미·강점·가치를 정리해 현실적인 진로 가설과 실행 계획을 만듭니다.</p>
+          <ul class="checklist program__list">
             <li>강점·가치 카드 워크 &amp; 커리어 앵커 탐색</li>
             <li>직무 가설 세우기와 현직자 리서치 설계</li>
             <li>면접 불안 &amp; 취업 슬럼프 다루기</li>
           </ul>
-          <div class="program__meta"><span>1:1 · 주 1회</span><strong>5주 코스</strong></div>
+          <p class="program__meta"><span>1:1 · 주 1회 50분</span><strong>5주 코스</strong></p>
         </article>
 
-        <article class="program reveal">
-          <span class="program__tag program__tag--butter">퍼스널 브랜딩</span>
+        <article class="program program--butter reveal">
+          <div class="program__head">
+            <span class="icon-badge icon-badge--butter" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
+            <span class="tag tag--butter">퍼스널 브랜딩</span>
+          </div>
           <h3 class="program__title">나다움 브랜딩 랩</h3>
-          <p class="program__desc">
-            잘 보이는 법이 아니라, 잘 설명하는 법을 배웁니다. 나의 이야기를
-            한 문장으로 정리하고 이력서·포트폴리오·SNS까지 연결해요.
-          </p>
-          <ul class="program__list">
+          <p class="program__desc">잘 보이는 법이 아니라, 잘 설명하는 법을 배웁니다. 나의 이야기를 한 문장으로 정리하고 이력서·포트폴리오·SNS까지 연결해요.</p>
+          <ul class="checklist program__list">
             <li>내 경험에서 키워드 뽑기</li>
             <li>한 문장 자기소개 &amp; 스토리라인 설계</li>
-            <li>채널별 표현 톤 만들기 (이력서·링크드인·SNS)</li>
+            <li>채널별 표현 톤 만들기</li>
           </ul>
-          <div class="program__meta"><span>소그룹 4-6인</span><strong>6주 코스</strong></div>
+          <p class="program__meta"><span>소그룹 4-6인 · 90분</span><strong>6주 코스</strong></p>
         </article>
 
-        <article class="program reveal" data-delay="80">
-          <span class="program__tag program__tag--lilac">자기 이해</span>
+        <article class="program program--lilac reveal" data-delay="70">
+          <div class="program__head">
+            <span class="icon-badge icon-badge--lilac" style="margin:0"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+            <span class="tag tag--lilac">자기 이해</span>
+          </div>
           <h3 class="program__title">마음 이음 서클</h3>
-          <p class="program__desc">
-            비슷한 고민을 가진 또래와 안전하게 이야기하는 시간. 감정과 관계 패턴을
-            들여다보며 &lsquo;나 이상한 게 아니었구나&rsquo;를 확인해요.
-          </p>
-          <ul class="program__list">
+          <p class="program__desc">비슷한 고민을 가진 또래와 안전하게 이야기하는 시간. 감정과 관계 패턴을 들여다보며 &lsquo;나 이상한 게 아니었구나&rsquo;를 확인해요.</p>
+          <ul class="checklist program__list">
             <li>감정 언어 넓히기 &amp; 자기 관찰 일지</li>
             <li>관계 패턴과 거절·요청 연습</li>
             <li>또래 피드백이 있는 안전한 서클</li>
           </ul>
-          <div class="program__meta"><span>그룹 6-8인</span><strong>8주 코스</strong></div>
+          <p class="program__meta"><span>그룹 6-8인 · 100분</span><strong>8주 코스</strong></p>
         </article>
       </div>
 
-      <div style="text-align:center; margin-top:40px" class="reveal">
-        <a class="btn btn--ghost" href="programs.html">프로그램 자세히 보기</a>
-      </div>
+      <p class="center mt-7 reveal">
+        <a class="btn btn--ghost" href="programs.html">
+          커리큘럼과 이용료 자세히 보기 <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </a>
+      </p>
     </div>
   </section>
 
-  <!-- ================= 진행 방식 ================= -->
+  <!-- ========== 진행 방식 ========== -->
   <section class="section section--paper">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <span class="eyebrow">진행 방식</span>
+        <p class="eyebrow eyebrow--sage">진행 방식</p>
         <h2 class="section-title">처음이어도 어렵지 않게, 네 걸음</h2>
         <p class="section-desc">신청부터 첫 세션까지 평균 3일. 준비물은 &lsquo;한번 이야기해 볼까&rsquo; 하는 마음뿐이에요.</p>
       </div>
 
-      <div class="grid grid-4 steps">
-        <div class="step reveal">
+      <ol class="grid grid-4 steps">
+        <li class="step reveal">
           <h3>간단 신청</h3>
           <p>1분이면 충분한 신청서. 고민을 정리하지 못한 상태여도 괜찮아요.</p>
-        </div>
-        <div class="step reveal" data-delay="80">
+        </li>
+        <li class="step reveal" data-delay="70">
           <h3>무료 첫 상담 20분</h3>
           <p>전화 또는 화상으로 가볍게. 지금 상황을 듣고 필요한 방향을 함께 봅니다.</p>
-        </div>
-        <div class="step reveal" data-delay="160">
+        </li>
+        <li class="step reveal" data-delay="140">
           <h3>맞춤 코스 설계</h3>
           <p>1:1이 좋을지, 또래 서클이 좋을지. 목표와 기간을 함께 정해요.</p>
-        </div>
-        <div class="step reveal" data-delay="240">
+        </li>
+        <li class="step reveal" data-delay="210">
           <h3>세션 &amp; 회고</h3>
           <p>매주 만나 실험하고 기록해요. 코스가 끝나면 나만의 성장 리포트를 드려요.</p>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- ================= 후기 ================= -->
+  <!-- ========== 후기 ========== -->
   <section class="section section--cream">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <span class="eyebrow">함께한 이야기</span>
+        <p class="eyebrow">함께한 이야기</p>
         <h2 class="section-title">비슷한 자리에 서 있던 사람들</h2>
       </div>
 
       <div class="grid grid-3">
-        <figure class="quote-card reveal" style="margin:0">
-          <span class="quote-card__mark" aria-hidden="true">❝</span>
-          <p>
-            &ldquo;병원에 갈 정도는 아닌 것 같아서 계속 미뤘어요. 여기선 &lsquo;그 정도&rsquo;를 증명하지 않아도
-            돼서 마음이 놓였어요. 4주 만에 퇴근 후 시간이 다시 제 것이 됐어요.&rdquo;
-          </p>
-          <figcaption class="quote-card__who">
+        <figure class="quote reveal">
+          <span class="quote__mark"><svg class="ico" aria-hidden="true"><use href="#i-quote"></use></svg></span>
+          <blockquote style="margin:0"><p>병원에 갈 정도는 아닌 것 같아서 계속 미뤘어요. 여기선 &lsquo;그 정도&rsquo;를 증명하지 않아도 돼서 마음이 놓였어요. 4주 만에 퇴근 후 시간이 다시 제 것이 됐어요.</p></blockquote>
+          <figcaption class="quote__who">
             <span class="avatar" aria-hidden="true">김</span>
             <span><b>김○○ 님</b><span>28세 · 쉼표 프로젝트</span></span>
           </figcaption>
         </figure>
 
-        <figure class="quote-card reveal" data-delay="80" style="margin:0">
-          <span class="quote-card__mark" aria-hidden="true">❝</span>
-          <p>
-            &ldquo;3년 차에 이직을 고민하며 왔는데, 회사가 아니라 제 기준이 없다는 걸 알게 됐어요.
-            지금은 이직을 미루고 사이드 프로젝트를 시작했습니다.&rdquo;
-          </p>
-          <figcaption class="quote-card__who">
+        <figure class="quote reveal" data-delay="70">
+          <span class="quote__mark"><svg class="ico" aria-hidden="true"><use href="#i-quote"></use></svg></span>
+          <blockquote style="margin:0"><p>3년 차에 이직을 고민하며 왔는데, 회사가 아니라 제 기준이 없다는 걸 알게 됐어요. 지금은 이직을 미루고 사이드 프로젝트를 시작했습니다.</p></blockquote>
+          <figcaption class="quote__who">
             <span class="avatar avatar--sage" aria-hidden="true">이</span>
             <span><b>이○○ 님</b><span>31세 · 방향 찾기 세션</span></span>
           </figcaption>
         </figure>
 
-        <figure class="quote-card reveal" data-delay="160" style="margin:0">
-          <span class="quote-card__mark" aria-hidden="true">❝</span>
-          <p>
-            &ldquo;나를 한 문장으로 소개하는 게 제일 어려웠어요. 6주 뒤엔 포트폴리오 첫 줄이 바뀌었고,
-            면접에서 처음으로 제 얘기를 편하게 했어요.&rdquo;
-          </p>
-          <figcaption class="quote-card__who">
+        <figure class="quote reveal" data-delay="140">
+          <span class="quote__mark"><svg class="ico" aria-hidden="true"><use href="#i-quote"></use></svg></span>
+          <blockquote style="margin:0"><p>나를 한 문장으로 소개하는 게 제일 어려웠어요. 6주 뒤엔 포트폴리오 첫 줄이 바뀌었고, 면접에서 처음으로 제 얘기를 편하게 했어요.</p></blockquote>
+          <figcaption class="quote__who">
             <span class="avatar avatar--lilac" aria-hidden="true">박</span>
             <span><b>박○○ 님</b><span>26세 · 나다움 브랜딩 랩</span></span>
           </figcaption>
         </figure>
       </div>
+
+      <p class="center mt-6 section-desc" style="font-size:var(--fs-xs)">
+        후기는 본인 동의를 받아 게시하며, 개인을 특정할 수 있는 정보는 가립니다.
+      </p>
     </div>
   </section>
 
-  <!-- ================= FAQ ================= -->
+  <!-- ========== FAQ ========== -->
   <section class="section" id="faq">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <span class="eyebrow">자주 묻는 질문</span>
+        <p class="eyebrow">자주 묻는 질문</p>
         <h2 class="section-title">궁금한 점, 먼저 답해 드릴게요</h2>
       </div>
 
       <div class="faq reveal">
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">정신과 치료나 심리 치료와 어떻게 다른가요?</button>
-          <div class="faq__a">
-            <p>
-              저희는 질병의 진단·치료를 다루지 않아요. 번아웃, 진로, 관계, 자기 이해처럼
-              &lsquo;일상은 굴러가지만 방향이 흐릿한&rsquo; 시기를 함께 정리하는 성장 중심 상담입니다.
-              대화 중 전문 치료가 필요하다고 판단되면 협력 기관을 안내해 드려요.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">정신과 치료나 심리 치료와 어떻게 다른가요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>저희는 질병의 진단·치료를 다루지 않아요. 번아웃, 진로, 관계, 자기 이해처럼 &lsquo;일상은 굴러가지만 방향이 흐릿한&rsquo; 시기를 함께 정리하는 성장 중심 상담입니다. 대화 중 전문 치료가 필요하다고 판단되면 협력 기관을 안내해 드려요.</p></div></div>
         </div>
 
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">고민이 정리되지 않은 상태인데 신청해도 되나요?</button>
-          <div class="faq__a">
-            <p>
-              물론이에요. 오히려 대부분이 그런 상태로 오세요. &ldquo;뭐가 문제인지 모르겠어요&rdquo;라는
-              말에서 첫 세션이 시작됩니다. 정리는 저희가 같이 해 드릴게요.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">고민이 정리되지 않은 상태인데 신청해도 되나요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>물론이에요. 오히려 대부분이 그런 상태로 오세요. &ldquo;뭐가 문제인지 모르겠어요&rdquo;라는 말에서 첫 세션이 시작됩니다. 정리는 저희가 같이 해 드릴게요.</p></div></div>
         </div>
 
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">비대면으로도 가능한가요?</button>
-          <div class="faq__a">
-            <p>
-              네. 모든 프로그램은 화상(줌)과 대면 중 선택할 수 있어요. 지방 거주자나
-              평일 낮이 어려운 직장인은 평일 저녁·주말 시간대를 이용하실 수 있습니다.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">비대면으로도 가능한가요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>네. 모든 프로그램은 화상(줌)과 대면 중 선택할 수 있어요. 지방 거주자나 평일 낮이 어려운 직장인은 평일 저녁·주말 시간대를 이용하실 수 있습니다.</p></div></div>
         </div>
 
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">회사나 가족에게 알려지지 않을까요?</button>
-          <div class="faq__a">
-            <p>
-              상담 내용은 전부 비밀로 지켜집니다. 본인 동의 없이는 어떤 정보도 외부에 공유되지 않아요.
-              닉네임으로 신청하셔도 괜찮습니다.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">회사나 가족에게 알려지지 않을까요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>상담 내용은 전부 비밀로 지켜집니다. 본인 동의 없이는 어떤 정보도 외부에 공유되지 않아요. 닉네임으로 신청하셔도 괜찮습니다.</p></div></div>
         </div>
 
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">비용은 어떻게 되나요?</button>
-          <div class="faq__a">
-            <p>
-              첫 상담 20분은 무료입니다. 이후 1:1 세션은 회당 6만 원, 그룹 프로그램은
-              회당 3만 원대이며, 코스로 신청하면 할인 적용돼요. 사회초년생·구직 중인 분을 위한
-              청년 할인(최대 30%)도 운영합니다.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">비용은 어떻게 되나요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>첫 상담 20분은 무료입니다. 이후 1:1 세션은 회당 6만 원, 그룹 프로그램은 회당 3만 원대이며, 코스로 신청하면 할인 적용돼요. 사회초년생·구직 중인 분을 위한 청년 할인(최대 30%)도 운영합니다.</p></div></div>
         </div>
 
         <div class="faq__item">
-          <button class="faq__q" type="button" aria-expanded="false">한 번만 받아봐도 되나요?</button>
-          <div class="faq__a">
-            <p>
-              가능합니다. 코스가 부담스러우면 단회 세션으로 먼저 경험해 보세요.
-              이어가고 싶어지면 그때 코스로 전환하면 됩니다.
-            </p>
-          </div>
+          <h3><button class="faq__q" type="button">한 번만 받아봐도 되나요?<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button></h3>
+          <div class="faq__a"><div><p>가능합니다. 코스가 부담스러우면 단회 세션으로 먼저 경험해 보세요. 이어가고 싶어지면 그때 코스로 전환하면 됩니다.</p></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= CTA ================= -->
-  <section class="section section--tight">
+  <!-- ========== CTA ========== -->
+  <section class="section section--sm">
     <div class="wrap">
-      <div class="cta-band reveal">
+      <div class="cta reveal">
         <h2>오늘의 마음, 오늘 이야기해요</h2>
         <p>무료 첫 상담 20분. 부담 없이, 편한 시간에 신청하세요.</p>
-        <a class="btn btn--soft" href="apply.html">상담 신청하기 →</a>
+        <a class="btn btn--soft btn--lg" href="apply.html">
+          상담 신청하기 <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ================= 푸터 ================= -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer__top">
       <div>
         <div class="logo">
-          <span class="logo__mark" aria-hidden="true">🌱</span>
+          <span class="logo__mark"><svg class="ico" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
           <span>청년마음이음상담소</span>
         </div>
         <p class="footer__about">
           20·30 청년의 번아웃, 진로, 자기 이해를 함께 정리하는 성장 중심 상담소입니다.
           아프지 않아도 오셔도 괜찮아요.
         </p>
-        <div class="emergency">
-          <b>도움이 급히 필요하다면</b> — 자살예방상담전화 <b>109</b> · 정신건강위기상담 <b>1577-0199</b> (24시간)<br />
-          저희는 위기 대응 기관이 아니에요. 위급한 순간에는 위 번호로 먼저 연락해 주세요.
-        </div>
+        <p class="emergency">
+          <svg class="ico" aria-hidden="true"><use href="#i-alert"></use></svg>
+          <span>
+            <b>도움이 급히 필요하다면</b> — 자살예방상담전화 <a href="tel:109">109</a> ·
+            정신건강위기상담 <a href="tel:1577-0199">1577-0199</a> (24시간)<br />
+            저희는 위기 대응 기관이 아니에요. 위급한 순간에는 위 번호로 먼저 연락해 주세요.
+          </span>
+        </p>
       </div>
 
-      <div>
+      <nav aria-label="사이트 바로가기">
         <h4>바로가기</h4>
         <div class="footer__links">
           <a href="index.html">홈</a>
@@ -381,26 +477,29 @@
           <a href="apply.html">상담 신청</a>
           <a href="index.html#faq">자주 묻는 질문</a>
         </div>
-      </div>
+      </nav>
 
       <div>
         <h4>이용 안내</h4>
-        <div class="footer__links">
-          <span>평일 10:00 – 21:00</span>
-          <span>토요일 10:00 – 17:00</span>
-          <span>hello@maeum-eum.kr</span>
-          <span>02-000-0000</span>
-        </div>
+        <address class="footer__links" style="font-style:normal">
+          <span>서울시 마포구 ○○로 12, 3층</span>
+          <span>평일 10:00 – 21:00 / 토 10:00 – 17:00</span>
+          <a href="mailto:hello@maeum-eum.kr">hello@maeum-eum.kr</a>
+          <a href="tel:02-000-0000">02-000-0000</a>
+        </address>
       </div>
     </div>
 
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> 청년마음이음상담소. All rights reserved.</span>
-      <span>본 사이트의 정보는 의료 행위나 진단을 대신하지 않습니다.</span>
+      <span>
+        <a href="privacy.html">개인정보처리방침</a> ·
+        본 사이트의 정보는 의료 행위나 진단을 대신하지 않습니다.
+      </span>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
