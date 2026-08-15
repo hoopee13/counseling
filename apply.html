@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>상담 신청 — 청년마음이음상담소</title>
+<meta name="description" content="무료 첫 상담 20분을 신청하세요. 1분이면 충분하고, 고민이 정리되지 않아도 괜찮습니다." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ff8a5b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="logo" href="index.html">
+      <span class="logo__mark" aria-hidden="true">🌱</span>
+      <span>청년마음이음상담소</span>
+    </a>
+    <button class="nav__toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+      <span></span>
+    </button>
+    <nav class="nav__menu" id="nav-menu" aria-label="주요 메뉴">
+      <a class="nav__link" href="index.html">홈</a>
+      <a class="nav__link" href="programs.html">프로그램</a>
+      <a class="nav__link" href="about.html">소개</a>
+      <a class="nav__link" href="index.html#faq">자주 묻는 질문</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="apply.html">상담 신청하기</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">상담 신청</span>
+      <h1>무료 첫 상담 20분, 편하게 신청하세요</h1>
+      <p>
+        1분이면 충분해요. 고민이 정리되지 않은 상태여도, 이름 대신 닉네임이어도 괜찮습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap form-layout">
+
+      <!-- ===== 신청 폼 ===== -->
+      <div class="form-card reveal">
+        <div class="form-note">
+          💌 신청 후 영업일 기준 <b>1일 이내</b>에 연락드려요. 상담 내용과 신청 정보는 비밀로 지켜집니다.
+        </div>
+
+        <form id="apply-form" novalidate>
+          <div class="field">
+            <label for="name">이름 또는 닉네임 <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" type="text" id="name" name="name" placeholder="예) 김청년 / 노을" autocomplete="name" required />
+            <p class="field__hint">본명이 부담스러우면 닉네임으로 적어 주세요.</p>
+          </div>
+
+          <div class="field">
+            <label for="contact">연락받을 곳 <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" type="text" id="contact" name="contact" placeholder="이메일 또는 휴대폰 번호" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="age">연령대</label>
+            <select class="select" id="age" name="age">
+              <option value="">선택해 주세요</option>
+              <option>만 19-22세</option>
+              <option>만 23-26세</option>
+              <option>만 27-30세</option>
+              <option>만 31-34세</option>
+              <option>만 35세 이상</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="status">지금의 상황</label>
+            <select class="select" id="status" name="status">
+              <option value="">선택해 주세요</option>
+              <option>학생 / 졸업 예정</option>
+              <option>취업 준비 중</option>
+              <option>직장인 1-3년 차</option>
+              <option>직장인 4년 차 이상</option>
+              <option>이직·퇴사 고민 중</option>
+              <option>프리랜서 / 창업</option>
+              <option>쉬어가는 중</option>
+            </select>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__legend">관심 있는 주제 <span class="req" aria-hidden="true">*</span></legend>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="topic" value="번아웃 회복" /><span>🔥 번아웃 회복</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="취업·진로" /><span>🧭 취업·진로</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="퍼스널 브랜딩" /><span>✨ 퍼스널 브랜딩</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="자기 이해" /><span>🌿 자기 이해</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="관계·소통" /><span>💬 관계·소통</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="아직 모르겠어요" /><span>🤔 아직 모르겠어요</span></label>
+            </div>
+            <p class="field__hint">여러 개 선택할 수 있어요.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__legend">상담 방식</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="radio" name="method" value="화상" checked /><span>💻 화상</span></label>
+              <label class="chip"><input type="radio" name="method" value="전화" /><span>📞 전화</span></label>
+              <label class="chip"><input type="radio" name="method" value="대면" /><span>🏠 대면</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__legend">편한 시간대</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="time" value="평일 오전" /><span>평일 오전</span></label>
+              <label class="chip"><input type="checkbox" name="time" value="평일 오후" /><span>평일 오후</span></label>
+              <label class="chip"><input type="checkbox" name="time" value="평일 저녁" /><span>평일 저녁</span></label>
+              <label class="chip"><input type="checkbox" name="time" value="토요일" /><span>토요일</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="message">하고 싶은 이야기</label>
+            <textarea class="textarea" id="message" name="message" placeholder="지금 어떤 마음인지, 떠오르는 대로 적어 주세요. 문장이 정리되지 않아도 괜찮아요."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" name="youth" value="yes" />
+              <span>청년 할인(구직 중·사회초년생) 안내를 받고 싶어요.</span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" name="privacy" value="agree" required />
+              <span>
+                상담 안내를 위한 <b>개인정보 수집·이용에 동의</b>합니다. <span class="req" aria-hidden="true">*</span>
+                수집 항목은 이름(닉네임)·연락처이며, 상담 안내 목적으로만 사용하고 1년 후 파기합니다.
+              </span>
+            </label>
+          </div>
+
+          <button class="btn btn--primary btn--block" type="submit">신청 보내기 →</button>
+
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <!-- ===== 사이드 ===== -->
+      <aside>
+        <div class="side-card reveal">
+          <h3>신청 후 이렇게 진행돼요</h3>
+          <dl>
+            <div>
+              <dt>STEP 1</dt>
+              <dd>영업일 1일 이내 연락 드리기</dd>
+            </div>
+            <div>
+              <dt>STEP 2</dt>
+              <dd>무료 첫 상담 20분 (전화·화상)</dd>
+            </div>
+            <div>
+              <dt>STEP 3</dt>
+              <dd>맞는 프로그램 함께 정하기</dd>
+            </div>
+            <div>
+              <dt>STEP 4</dt>
+              <dd>첫 세션 일정 확정</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="side-card reveal" data-delay="80" style="background:var(--sage-tint); border-color:transparent">
+          <h3>이런 점이 걱정된다면</h3>
+          <p style="font-size:0.92rem; color:#3f7a60">
+            <b>&ldquo;이 정도 고민으로 가도 되나?&rdquo;</b><br />
+            네, 됩니다. 기준을 세우는 건 저희 몫이 아니라 본인의 마음이에요.
+          </p>
+          <p style="font-size:0.92rem; color:#3f7a60; margin-top:14px">
+            <b>&ldquo;기록이 남으면 어쩌지?&rdquo;</b><br />
+            의료 기록이 아니라 상담 기록이며, 외부에 공유되지 않습니다.
+          </p>
+        </div>
+
+        <div class="side-card reveal" data-delay="160">
+          <h3>바로 연락하고 싶다면</h3>
+          <dl>
+            <div>
+              <dt>이메일</dt>
+              <dd>hello@maeum-eum.kr</dd>
+            </div>
+            <div>
+              <dt>전화</dt>
+              <dd>02-000-0000</dd>
+            </div>
+            <div>
+              <dt>운영 시간</dt>
+              <dd>평일 10:00–21:00 / 토 10:00–17:00</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="logo">
+          <span class="logo__mark" aria-hidden="true">🌱</span>
+          <span>청년마음이음상담소</span>
+        </div>
+        <p class="footer__about">
+          20·30 청년의 번아웃, 진로, 자기 이해를 함께 정리하는 성장 중심 상담소입니다.
+          아프지 않아도 오셔도 괜찮아요.
+        </p>
+        <div class="emergency">
+          <b>도움이 급히 필요하다면</b> — 자살예방상담전화 <b>109</b> · 정신건강위기상담 <b>1577-0199</b> (24시간)<br />
+          저희는 위기 대응 기관이 아니에요. 위급한 순간에는 위 번호로 먼저 연락해 주세요.
+        </div>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <div class="footer__links">
+          <a href="index.html">홈</a>
+          <a href="programs.html">프로그램</a>
+          <a href="about.html">상담소 소개</a>
+          <a href="apply.html">상담 신청</a>
+          <a href="index.html#faq">자주 묻는 질문</a>
+        </div>
+      </div>
+      <div>
+        <h4>이용 안내</h4>
+        <div class="footer__links">
+          <span>평일 10:00 – 21:00</span>
+          <span>토요일 10:00 – 17:00</span>
+          <span>hello@maeum-eum.kr</span>
+          <span>02-000-0000</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> 청년마음이음상담소. All rights reserved.</span>
+      <span>본 사이트의 정보는 의료 행위나 진단을 대신하지 않습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
