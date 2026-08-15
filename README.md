@@ -29,7 +29,7 @@ python3 -m http.server 8000
 4. 1-2분 뒤 아래 주소로 접속
 
 ```
-https://hoopee13.github.io/asdf/
+https://hoopee13.github.io/counseling/
 ```
 
 `sitemap.xml`, `robots.txt`, 각 페이지의 `canonical`·`og:image` 주소가
