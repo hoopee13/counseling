@@ -207,8 +207,8 @@
         options: [
           { label: "잘 쉬고 나답게 회복하는 것", score: "burnout" },
           { label: "일과 진로의 방향을 정하는 것", score: "career" },
-          { label: "나를 잘 설명할 수 있게 되는 것", score: "branding" },
-          { label: "내 마음을 더 잘 이해하는 것", score: "self" }
+          { label: "복잡한 감정을 정리하고 표현하는 것", score: "emotion" },
+          { label: "비슷한 고민을 나눌 사람을 만나는 것", score: "self" }
         ]
       },
       {
@@ -216,8 +216,8 @@
         options: [
           { label: "“잠깐 멈추고 숨을 고르고 싶다”", score: "burnout" },
           { label: "“다음 단계를 제대로 준비하고 싶다”", score: "career" },
-          { label: "“내 강점을 말로 정리하고 싶다”", score: "branding" },
-          { label: "“비교 대신 내 기준을 세우고 싶다”", score: "self" }
+          { label: "“요즘 내 감정이 뭔지 잘 모르겠다”", score: "emotion" },
+          { label: "“혼자 삭이지 말고 이야기를 나누고 싶다”", score: "self" }
         ]
       },
       {
@@ -225,7 +225,7 @@
         options: [
           { label: "혼자 차분히, 1:1로 깊게", score: "burnout", also: "career" },
           { label: "계획과 실행 중심으로 구체적으로", score: "career" },
-          { label: "피드백을 주고받는 소그룹으로", score: "branding" },
+          { label: "표현하고 정리하는 활동 중심으로", score: "emotion" },
           { label: "비슷한 또래와 이야기 나누며", score: "self" }
         ]
       }
@@ -247,13 +247,13 @@
         desc: "스펙을 더 쌓기 전에 나만의 기준부터 세워요. 강점과 가치를 정리해 현실적인 진로 가설과 90일 계획을 만듭니다.",
         href: "programs.html#career"
       },
-      branding: {
+      emotion: {
         tone: "sun",
-        icon: "sparkle",
-        name: "나다움 브랜딩 랩",
-        tagline: "퍼스널 브랜딩 · 6주 소그룹",
-        desc: "잘 보이는 법이 아니라 잘 설명하는 법. 흩어진 경험을 한 문장으로 묶고 이력서·포트폴리오까지 연결해요.",
-        href: "programs.html#branding"
+        icon: "cloud",
+        name: "감정세탁소",
+        tagline: "감정 돌봄 · 6주 소그룹",
+        desc: "복잡하게 얽힌 감정을 알아차리고 표현해요. 일상에서 바로 쓸 수 있는 나만의 감정 돌봄 방법을 찾아갑니다.",
+        href: "programs.html#emotion"
       },
       self: {
         tone: "green",
@@ -271,7 +271,7 @@
     if (!root) return;
 
     var step = 0;
-    var scores = { burnout: 0, career: 0, branding: 0, self: 0 };
+    var scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
     var total = QUIZ.questions.length;
 
     function icon(name, cls) {
@@ -338,14 +338,14 @@
       if (e.target.closest("[data-back]")) {
         /* 점수를 정확히 되돌리기 어려우므로 처음부터 다시 시작한다 */
         step = 0;
-        scores = { burnout: 0, career: 0, branding: 0, self: 0 };
+        scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
         renderQuestion();
         return;
       }
 
       if (e.target.closest("[data-restart]")) {
         step = 0;
-        scores = { burnout: 0, career: 0, branding: 0, self: 0 };
+        scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
         renderQuestion();
       }
     });
