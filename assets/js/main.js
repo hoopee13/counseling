@@ -583,8 +583,8 @@
           var aborted = err && err.name === "AbortError";
           showStatus(
             aborted
-              ? "응답이 너무 늦어요. 잠시 후 다시 시도해 주시거나 hello@maeum-eum.kr 로 보내주세요."
-              : "전송에 실패했어요. 잠시 후 다시 눌러주시거나 hello@maeum-eum.kr 로 보내주세요.",
+              ? "응답이 너무 늦어요. 잠시 후 다시 시도해 주시거나 gwangju.ymcc@gmail.com 로 보내주세요."
+              : "전송에 실패했어요. 잠시 후 다시 눌러주시거나 gwangju.ymcc@gmail.com 로 보내주세요.",
             /* 문의가 들어왔을 때 원인을 바로 알 수 있도록 기술적 이유를 함께 남긴다 */
             aborted ? "원인: 응답 시간 초과" : "원인: " + ((err && err.message) || "알 수 없음")
           );
