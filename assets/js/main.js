@@ -362,6 +362,16 @@
 
     var status = $("#form-status");
 
+    /* 체험단 페이지에서 넘어온 신청인지 확인한다.
+       시트 열 구성을 바꾸지 않아도 되도록 '관심 주제' 앞에 표시만 붙인다. */
+    var isTrial = /[?&]trial=/.test(window.location.search);
+    if (isTrial) {
+      var note = $("#trial-note");
+      if (note) note.hidden = false;
+      var heading = $(".page-head h1");
+      if (heading) heading.textContent = "프로그램 체험단 신청";
+    }
+
     function fieldOf(el) { return el ? el.closest(".field") : null; }
 
     function setError(el, message) {
@@ -425,17 +435,19 @@
         "연락처": (data.get("contact") || "").toString().trim(),
         "연령대": (data.get("age") || "").toString() || "-",
         "현재 상황": (data.get("status") || "").toString() || "-",
-        "관심 주제": data.getAll("topic").join(", ") || "-",
+        "관심 주제": (isTrial ? "[체험단] " : "") + (data.getAll("topic").join(", ") || "-"),
         "상담 방식": (data.get("method") || "").toString() || "-",
         "편한 시간대": data.getAll("time").join(", ") || "-",
         "하고 싶은 이야기": (data.get("message") || "").toString().trim() || "-",
+        /* 항목명은 스프레드시트 열 이름과 같아야 하므로 그대로 둔다.
+           화면에 보이는 문구만 "청년 복지 안내"로 바뀌었다. */
         "청년 할인 안내": data.get("youth") ? "희망" : "해당 없음",
         "개인정보 동의": "동의",
         "신청 시각": new Date().toLocaleString("ko-KR")
       };
 
       /* Formspree 등에서 메일 제목과 회신 주소로 쓰이는 값 */
-      payload._subject = "[상담 신청] " + payload["이름/닉네임"] + " 님";
+      payload._subject = (isTrial ? "[체험단 신청] " : "[상담 신청] ") + payload["이름/닉네임"] + " 님";
       if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload["연락처"])) {
         payload._replyto = payload["연락처"];
       }

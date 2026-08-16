@@ -69,6 +69,7 @@
     <nav class="nav__menu" id="nav-menu" aria-label="주요 메뉴">
       <a class="nav__link" href="index.html">홈</a>
       <a class="nav__link" href="programs.html">프로그램</a>
+      <a class="nav__link" href="trial.html">체험단</a>
       <a class="nav__link" href="about.html">소개</a>
       <a class="nav__link" href="index.html#faq">자주 묻는 질문</a>
       <a class="btn btn--primary btn--sm nav__cta" href="apply.html" aria-current="page">상담 신청하기</a>
@@ -94,6 +95,12 @@
 
       <!-- ===== 신청 폼 ===== -->
       <div class="form-card reveal">
+        <!-- 체험단 링크로 들어온 경우에만 스크립트가 보여줍니다 -->
+        <p class="trial-note" id="trial-note" hidden>
+          <svg class="ico" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+          <span><b>프로그램 체험단 신청</b>으로 접수됩니다.
+            관심 있는 주제에서 체험을 원하는 프로그램을 골라주세요.</span>
+        </p>
         <p class="form-note">
           <svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg>
           <span>신청 후 영업일 기준 <b>1일 이내</b>에 연락드려요. 상담 내용과 신청 정보는 비밀로 지켜집니다.</span>
@@ -167,14 +174,14 @@
             </p>
           </fieldset>
 
-          <fieldset class="field">
-            <legend class="field__legend">상담 방식</legend>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="method" value="화상" checked /><span>화상</span></label>
-              <label class="chip"><input type="radio" name="method" value="전화" /><span>전화</span></label>
-              <label class="chip"><input type="radio" name="method" value="대면" /><span>대면</span></label>
-            </div>
-          </fieldset>
+          <div class="field">
+            <p class="field__legend">상담 방식</p>
+            <p class="form-note" style="margin-bottom:0">
+              <svg class="ico" aria-hidden="true"><use href="#i-map-pin"></use></svg>
+              <span>모든 상담은 상담소에서 <b>대면</b>으로 진행됩니다.</span>
+            </p>
+            <input type="hidden" name="method" value="대면" />
+          </div>
 
           <fieldset class="field">
             <legend class="field__legend">편한 시간대</legend>
@@ -195,7 +202,7 @@
           <div class="field">
             <label class="check">
               <input type="checkbox" name="youth" value="yes" />
-              <span>청년 할인(구직 중·사회초년생) 안내를 받고 싶어요.</span>
+              <span>청년 복지 안내(구직 중·사회초년생 대상)를 받고 싶어요.</span>
             </label>
           </div>
 
@@ -233,7 +240,7 @@
           <h3>신청 후 이렇게 진행돼요</h3>
           <dl>
             <div><dt>STEP 1</dt><dd>영업일 1일 이내 연락 드리기</dd></div>
-            <div><dt>STEP 2</dt><dd>첫 상담 20분 (전화·화상)</dd></div>
+            <div><dt>STEP 2</dt><dd>첫 상담 20분 (대면)</dd></div>
             <div><dt>STEP 3</dt><dd>맞는 프로그램 함께 정하기</dd></div>
             <div><dt>STEP 4</dt><dd>첫 세션 일정 확정</dd></div>
           </dl>
@@ -293,6 +300,7 @@
         <div class="footer__links">
           <a href="index.html">홈</a>
           <a href="programs.html">프로그램</a>
+          <a href="trial.html">체험단</a>
           <a href="about.html">상담소 소개</a>
           <a href="apply.html">상담 신청</a>
           <a href="index.html#faq">자주 묻는 질문</a>
