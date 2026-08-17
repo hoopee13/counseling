@@ -206,8 +206,10 @@
         q: "요즘 가장 바라는 것은 무엇에 가깝나요?",
         options: [
           { label: "잘 쉬고 나답게 회복하는 것", score: "burnout" },
-          { label: "일과 진로의 방향을 정하는 것", score: "career" },
+          { label: "스트레스에 덜 휘둘리는 것", score: "stress" },
           { label: "복잡한 감정을 정리하고 표현하는 것", score: "emotion" },
+          { label: "일과 진로의 방향을 정하는 것", score: "career" },
+          { label: "연애와 가까운 관계를 이해하는 것", score: "love" },
           { label: "비슷한 고민을 나눌 사람을 만나는 것", score: "self" }
         ]
       },
@@ -215,8 +217,10 @@
         q: "요즘 자주 떠올리는 생각은 어느 쪽인가요?",
         options: [
           { label: "“잠깐 멈추고 숨을 고르고 싶다”", score: "burnout" },
-          { label: "“다음 단계를 제대로 준비하고 싶다”", score: "career" },
+          { label: "“사소한 일에도 자꾸 예민해진다”", score: "stress" },
           { label: "“요즘 내 감정이 뭔지 잘 모르겠다”", score: "emotion" },
+          { label: "“다음 단계를 제대로 준비하고 싶다”", score: "career" },
+          { label: "“관계에서 늘 비슷한 어려움이 반복된다”", score: "love" },
           { label: "“혼자 삭이지 말고 이야기를 나누고 싶다”", score: "self" }
         ]
       },
@@ -224,8 +228,8 @@
         q: "어떤 방식이 더 편하게 느껴지나요?",
         options: [
           { label: "혼자 차분히, 1:1로 깊게", score: "burnout", also: "career" },
-          { label: "계획과 실행 중심으로 구체적으로", score: "career" },
-          { label: "표현하고 정리하는 활동 중심으로", score: "emotion" },
+          { label: "검사 결과처럼 뚜렷한 근거를 보고", score: "love" },
+          { label: "연습하고 몸으로 익히는 방식으로", score: "stress", also: "emotion" },
           { label: "비슷한 또래와 이야기 나누며", score: "self" }
         ]
       }
@@ -255,6 +259,22 @@
         desc: "복잡하게 얽힌 감정을 알아차리고 표현해요. 일상에서 바로 쓸 수 있는 나만의 감정 돌봄 방법을 찾아갑니다.",
         href: "programs.html#emotion"
       },
+      stress: {
+        tone: "coral",
+        icon: "coffee",
+        name: "스트레스 케어 클래스",
+        tagline: "스트레스 관리 · 4주 소그룹",
+        desc: "스트레스를 없애는 대신 다루는 법을 배워요. 내 신호를 알아차리고 상황에 맞는 대처를 연습합니다.",
+        href: "programs.html#stress"
+      },
+      love: {
+        tone: "green",
+        icon: "heart",
+        name: "연애애착유형검사",
+        tagline: "관계·애착 · 검사와 해석 상담",
+        desc: "연애와 가까운 관계에서 반복되는 패턴을 애착 유형으로 살펴봐요. 검사 후 1:1 해석 상담이 이어집니다.",
+        href: "programs.html#love"
+      },
       self: {
         tone: "green",
         icon: "leaf",
@@ -271,7 +291,9 @@
     if (!root) return;
 
     var step = 0;
-    var scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
+    var scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+    /* 동점일 때 먼저 고른 주제를 우선하려고 선택 순서를 따로 기록한다 */
+    var picked = [];
     var total = QUIZ.questions.length;
 
     function icon(name, cls) {
@@ -302,9 +324,12 @@
     }
 
     function renderResult() {
-      var best = "burnout";
+      var best = picked[0] || "burnout";
       Object.keys(scores).forEach(function (key) {
         if (scores[key] > scores[best]) best = key;
+        /* 점수가 같으면 더 먼저 고른 쪽을 남긴다 */
+        else if (scores[key] === scores[best] && picked.indexOf(key) > -1 &&
+          (picked.indexOf(best) === -1 || picked.indexOf(key) < picked.indexOf(best))) best = key;
       });
       var r = QUIZ.results[best];
 
@@ -329,6 +354,8 @@
         var opt = QUIZ.questions[step].options[Number(option.dataset.i)];
         scores[opt.score] += 2;
         if (opt.also) scores[opt.also] += 1;
+        if (picked.indexOf(opt.score) === -1) picked.push(opt.score);
+        if (opt.also && picked.indexOf(opt.also) === -1) picked.push(opt.also);
         step += 1;
         if (step >= total) renderResult();
         else renderQuestion();
@@ -338,14 +365,16 @@
       if (e.target.closest("[data-back]")) {
         /* 점수를 정확히 되돌리기 어려우므로 처음부터 다시 시작한다 */
         step = 0;
-        scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
+        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+        picked = [];
         renderQuestion();
         return;
       }
 
       if (e.target.closest("[data-restart]")) {
         step = 0;
-        scores = { burnout: 0, career: 0, emotion: 0, self: 0 };
+        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+        picked = [];
         renderQuestion();
       }
     });
