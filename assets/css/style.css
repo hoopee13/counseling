@@ -767,6 +767,25 @@ b, strong { font-weight: 700; }
 .value h3 { font-size: var(--fs-base); margin-bottom: var(--s2); }
 .value p  { color: var(--ink-2); font-size: var(--fs-sm); }
 
+/* 체험단 안내 밴드 */
+.trial-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s6);
+  padding: var(--s6) var(--s7);
+  border: 1.5px solid var(--blue);
+  border-radius: var(--r-xl);
+  background: linear-gradient(120deg, var(--blue-1) 0%, var(--paper) 62%, var(--green-1) 100%);
+}
+.trial-band__title { font-size: var(--fs-lg); margin-bottom: var(--s2); }
+.trial-band__desc { color: var(--ink-2); font-size: var(--fs-sm); max-width: 42em; }
+.trial-band__actions { display: flex; gap: var(--s3); flex-wrap: wrap; flex: none; }
+
+@media (max-width: 860px) {
+  .trial-band { flex-direction: column; align-items: flex-start; padding: var(--s6) var(--s5); }
+}
+
 /* CTA 밴드 */
 .cta {
   position: relative;
@@ -941,6 +960,21 @@ b, strong { font-weight: 700; }
   background: var(--paper);
   box-shadow: var(--sh-1);
 }
+
+/* 체험단 링크로 들어왔을 때만 보이는 안내 */
+.trial-note {
+  display: flex;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  padding: var(--s4) var(--s5);
+  border: 1.5px solid var(--blue);
+  border-radius: var(--r-md);
+  background: var(--blue-1);
+  color: var(--blue-6);
+  font-size: var(--fs-sm);
+}
+.trial-note .ico { flex: none; margin-top: 2px; }
+.trial-note[hidden] { display: none; }
 
 .form-note {
   display: flex;

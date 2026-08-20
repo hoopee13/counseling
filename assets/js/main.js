@@ -210,7 +210,8 @@
           { label: "복잡한 감정을 정리하고 표현하는 것", score: "emotion" },
           { label: "일과 진로의 방향을 정하는 것", score: "career" },
           { label: "연애와 가까운 관계를 이해하는 것", score: "love" },
-          { label: "비슷한 고민을 나눌 사람을 만나는 것", score: "self" }
+          { label: "비슷한 고민을 나눌 사람을 만나는 것", score: "self" },
+          { label: "집중이 흐트러지지 않게 하는 것", score: "brain" }
         ]
       },
       {
@@ -221,7 +222,8 @@
           { label: "“요즘 내 감정이 뭔지 잘 모르겠다”", score: "emotion" },
           { label: "“다음 단계를 제대로 준비하고 싶다”", score: "career" },
           { label: "“관계에서 늘 비슷한 어려움이 반복된다”", score: "love" },
-          { label: "“혼자 삭이지 말고 이야기를 나누고 싶다”", score: "self" }
+          { label: "“혼자 삭이지 말고 이야기를 나누고 싶다”", score: "self" },
+          { label: "“집중이 안 되고 늘 몸이 긴장돼 있다”", score: "brain" }
         ]
       },
       {
@@ -230,6 +232,7 @@
           { label: "혼자 차분히, 1:1로 깊게", score: "burnout", also: "career" },
           { label: "검사 결과처럼 뚜렷한 근거를 보고", score: "love" },
           { label: "연습하고 몸으로 익히는 방식으로", score: "stress", also: "emotion" },
+          { label: "측정한 내 상태를 눈으로 확인하며", score: "brain", also: "love" },
           { label: "비슷한 또래와 이야기 나누며", score: "self" }
         ]
       }
@@ -275,6 +278,14 @@
         desc: "연애와 가까운 관계에서 반복되는 패턴을 애착 유형으로 살펴봐요. 검사 후 1:1 해석 상담이 이어집니다.",
         href: "programs.html#love"
       },
+      brain: {
+        tone: "blue",
+        icon: "brain",
+        name: "뇌파 리듬 트레이닝",
+        tagline: "집중·이완 · 6주 코스",
+        desc: "측정한 내 뇌파 리듬을 보면서 집중과 이완을 연습해요. 지금 얼마나 긴장해 있는지 스스로 알아차리는 훈련입니다.",
+        href: "programs.html#brain"
+      },
       self: {
         tone: "green",
         icon: "leaf",
@@ -291,7 +302,7 @@
     if (!root) return;
 
     var step = 0;
-    var scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+    var scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0, brain: 0 };
     /* 동점일 때 먼저 고른 주제를 우선하려고 선택 순서를 따로 기록한다 */
     var picked = [];
     var total = QUIZ.questions.length;
@@ -365,7 +376,7 @@
       if (e.target.closest("[data-back]")) {
         /* 점수를 정확히 되돌리기 어려우므로 처음부터 다시 시작한다 */
         step = 0;
-        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0, brain: 0 };
         picked = [];
         renderQuestion();
         return;
@@ -373,7 +384,7 @@
 
       if (e.target.closest("[data-restart]")) {
         step = 0;
-        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0 };
+        scores = { burnout: 0, stress: 0, emotion: 0, career: 0, love: 0, self: 0, brain: 0 };
         picked = [];
         renderQuestion();
       }
@@ -390,6 +401,16 @@
     if (!form) return;
 
     var status = $("#form-status");
+
+    /* 체험단 페이지에서 넘어온 신청인지 확인한다.
+       시트 열 구성을 바꾸지 않아도 되도록 '관심 주제' 앞에 표시만 붙인다. */
+    var isTrial = /[?&]trial=/.test(window.location.search);
+    if (isTrial) {
+      var note = $("#trial-note");
+      if (note) note.hidden = false;
+      var heading = $(".page-head h1");
+      if (heading) heading.textContent = "프로그램 체험단 신청";
+    }
 
     function fieldOf(el) { return el ? el.closest(".field") : null; }
 
@@ -454,7 +475,7 @@
         "연락처": (data.get("contact") || "").toString().trim(),
         "연령대": (data.get("age") || "").toString() || "-",
         "현재 상황": (data.get("status") || "").toString() || "-",
-        "관심 주제": data.getAll("topic").join(", ") || "-",
+        "관심 주제": (isTrial ? "[체험단] " : "") + (data.getAll("topic").join(", ") || "-"),
         "상담 방식": (data.get("method") || "").toString() || "-",
         "편한 시간대": data.getAll("time").join(", ") || "-",
         "하고 싶은 이야기": (data.get("message") || "").toString().trim() || "-",
@@ -466,7 +487,7 @@
       };
 
       /* Formspree 등에서 메일 제목과 회신 주소로 쓰이는 값 */
-      payload._subject = "[상담 신청] " + payload["이름/닉네임"] + " 님";
+      payload._subject = (isTrial ? "[체험단 신청] " : "[상담 신청] ") + payload["이름/닉네임"] + " 님";
       if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload["연락처"])) {
         payload._replyto = payload["연락처"];
       }
