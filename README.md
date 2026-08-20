@@ -29,11 +29,29 @@ python3 -m http.server 8000
 4. 1-2분 뒤 아래 주소로 접속
 
 ```
-https://hoopee13.github.io/counseling/
+https://youthmind.co.kr/
 ```
 
-`sitemap.xml`, `robots.txt`, 각 페이지의 `canonical`·`og:image` 주소가
-모두 이 URL 기준으로 맞춰져 있습니다. 다른 도메인을 쓰신다면 그 값들만 바꿔주세요.
+### 도메인
+
+저장소 루트의 `CNAME` 파일이 대표 주소를 정합니다. 지금은 `youthmind.co.kr`
+입니다. `sitemap.xml`, `robots.txt`, 각 페이지의 `canonical`·`og:image`
+주소가 모두 이 값에 맞춰져 있습니다.
+
+**도메인을 바꾸면 `CNAME` 만 고쳐서는 안 됩니다.** 아래 19곳을 함께 바꿔야
+검색 노출과 공유 미리보기가 새 주소를 가리킵니다.
+
+```bash
+# 옛 주소 → 새 주소 (끝 슬래시까지 포함해서 넣으세요)
+grep -rl "https://youthmind.co.kr/" *.html sitemap.xml robots.txt README.md \
+  | xargs sed -i 's#https://youthmind.co.kr/#https://새주소/#g'
+```
+
+### 검색엔진 등록
+
+`googlecf4f7b1e66fb0c9a.html` 은 구글 서치콘솔 소유 확인 파일입니다.
+구글이 주기적으로 다시 확인하므로 **이름과 내용을 바꾸거나 지우지 마세요.**
+사이트맵은 서치콘솔에서 `sitemap.xml` 로 제출하면 됩니다.
 
 ---
 

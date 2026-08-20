@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hoopee13.github.io/counseling/</loc>
+    <loc>https://youthmind.co.kr/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hoopee13.github.io/counseling/programs.html</loc>
+    <loc>https://youthmind.co.kr/programs.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://hoopee13.github.io/counseling/trial.html</loc>
+    <loc>https://youthmind.co.kr/trial.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://hoopee13.github.io/counseling/about.html</loc>
+    <loc>https://youthmind.co.kr/about.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hoopee13.github.io/counseling/apply.html</loc>
+    <loc>https://youthmind.co.kr/apply.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
